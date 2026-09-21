@@ -126,8 +126,11 @@ a { color: inherit; }
 }
 
 .hero h1 {
-  font-size: clamp(2rem, 1.4rem + 2.6vw, 3.1rem);
-  max-width: 20ch;
+  /* Four fragments rather than one sentence: smaller type and a wider
+     measure, so the headline reads as a list instead of a wall. */
+  font-size: clamp(1.55rem, 1.1rem + 1.8vw, 2.25rem);
+  max-width: 28ch;
+  line-height: 1.18;
   text-wrap: balance;
 }
 

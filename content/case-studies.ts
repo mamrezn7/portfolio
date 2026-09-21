@@ -13,10 +13,11 @@ export const site = {
   name: "Mohammadreza Shirazi",
   short: "Mohammadreza",
   role: "Frontend Engineer",
-  kicker: "Frontend engineer · React and TypeScript · Nine years",
+  kicker: "Frontend engineer · React and TypeScript · Enterprise web applications",
   headline:
-    "I build the parts of web applications that get slow, complicated, or both.",
-  sub: "Mostly enterprise products: process mining, business process management, and a consumer bank.",
+    "The flow that loses people. The screen with more data than it can hold. The library that will not bend. The rules that keep changing.",
+  sub:
+    "These are the problems I have spent nine years on. Process mining, business process management, digital banking, language learning.",
   email: "shirazi@mamrez.com",
   linkedin: "https://linkedin.com/in/mohammadreza-ha-shirazi",
   timezone: "GMT+3:30",
