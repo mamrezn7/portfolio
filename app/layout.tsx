@@ -17,10 +17,11 @@ export const metadata: Metadata = {
     default: `${site.name} — ${site.role}`,
     template: `%s — ${site.name}`,
   },
-  description: site.headline,
+  description: site.description,
+  alternates: { canonical: "/" },
   openGraph: {
     title: `${site.name} — ${site.role}`,
-    description: site.headline,
+    description: site.description,
     url: "https://mamrez.com",
     siteName: site.name,
     type: "website",

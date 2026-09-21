@@ -20,7 +20,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const cs = caseStudies.find((c) => c.slug === slug);
   if (!cs) return {};
-  return { title: cs.title, description: cs.blurb };
+  return {
+    title: cs.title,
+    description: cs.blurb,
+    alternates: { canonical: `/work/${slug}/` },
+  };
 }
 
 export default async function CaseStudyPage({

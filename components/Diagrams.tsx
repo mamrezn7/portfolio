@@ -24,11 +24,11 @@ function Box({ x, y, w = 170, h = 58, title, sub, tone = "plain" }: BoxProps) {
   return (
     <g>
       <rect x={x} y={y} width={w} height={h} rx={7} className={cls} />
-      <text x={x + 14} y={y + (sub ? 24 : 34)} className="dLabel">
+      <text x={x + 14} y={y + (sub ? h / 2 - 3 : h / 2 + 4.5)} className="dLabel">
         {title}
       </text>
       {sub ? (
-        <text x={x + 14} y={y + 42} className="dMuted">
+        <text x={x + 14} y={y + h / 2 + 13} className="dMuted">
           {sub}
         </text>
       ) : null}
@@ -183,10 +183,10 @@ function DaviloPanel({
       ) : null}
       {shape === "two" ? (
         <>
-          <Box x={x + 8} y={34} w={84} h={40} title="Teacher" sub="login" />
-          <Box x={x + 98} y={34} w={84} h={40} title="Student" sub="login" />
-          <line x1={x + 50} y1={74} x2={x + 50} y2={112} className="dStroke" />
-          <line x1={x + 140} y1={74} x2={x + 140} y2={112} className="dStroke" />
+          <Box x={x + 8} y={34} w={84} h={46} title="Teacher" sub="login" />
+          <Box x={x + 98} y={34} w={84} h={46} title="Student" sub="login" />
+          <line x1={x + 50} y1={80} x2={x + 50} y2={112} className="dStroke" />
+          <line x1={x + 140} y1={80} x2={x + 140} y2={112} className="dStroke" />
           <polygon points={`${x + 50},120 ${x + 45.5},112 ${x + 54.5},112`} className="dHead" />
           <polygon points={`${x + 140},120 ${x + 135.5},112 ${x + 144.5},112`} className="dHead" />
           <Box x={x + 8} y={120} w={84} h={54} title="Teacher" sub="dashboard" />

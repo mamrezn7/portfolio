@@ -18,6 +18,8 @@ export const site = {
     "The flow that loses people. The screen with more data than it can hold. The library that will not bend. The rules that keep changing.",
   sub:
     "These are the problems I have spent nine years on. Process mining, business process management, digital banking, language learning.",
+  description:
+    "Frontend engineer, React and TypeScript. Nine years on enterprise web applications: process mining, business process management, digital banking.",
   email: "shirazi@mamrez.com",
   linkedin: "https://linkedin.com/in/mohammadreza-ha-shirazi",
   timezone: "GMT+3:30",
