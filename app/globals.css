@@ -1,0 +1,328 @@
+:root {
+  --bg: #fbfaf7;
+  --bg-raised: #ffffff;
+  --ink: #16150f;
+  --ink-soft: #5d594c;
+  --ink-faint: #8d8779;
+  --rule: #e2ded2;
+  --accent: #9a4a1e;
+  --accent-soft: #f0e4d8;
+  --danger-bg: #fdecec;
+  --danger-ink: #8f1d1d;
+  --danger-rule: #f0b9b9;
+
+  --measure: 34rem;
+  --gutter: 1.5rem;
+  --step: clamp(1rem, 0.85rem + 0.6vw, 1.125rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12110f;
+    --bg-raised: #1a1917;
+    --ink: #eeebe4;
+    --ink-soft: #a8a294;
+    --ink-faint: #7b7568;
+    --rule: #2e2c27;
+    --accent: #e0915c;
+    --accent-soft: #2a211a;
+    --danger-bg: #2a1616;
+    --danger-ink: #f0a0a0;
+    --danger-rule: #5a2626;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #12110f;
+  --bg-raised: #1a1917;
+  --ink: #eeebe4;
+  --ink-soft: #a8a294;
+  --ink-faint: #7b7568;
+  --rule: #2e2c27;
+  --accent: #e0915c;
+  --accent-soft: #2a211a;
+  --danger-bg: #2a1616;
+  --danger-ink: #f0a0a0;
+  --danger-rule: #5a2626;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: var(--step);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; }
+
+::selection { background: var(--accent-soft); color: var(--ink); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.shell {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.display {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.12;
+  margin: 0;
+}
+
+/* ---------- site header ---------- */
+
+.siteHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 2.25rem 0 0;
+  flex-wrap: wrap;
+}
+
+.wordmark {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.15rem;
+  text-decoration: none;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.navLinks a { text-decoration: none; }
+.navLinks a:hover { color: var(--accent); }
+
+/* ---------- hero ---------- */
+
+.hero { padding: 4.5rem 0 3rem; }
+
+.heroKicker {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 1.5rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 3.1rem);
+  max-width: 20ch;
+  text-wrap: balance;
+}
+
+.hero .tagline {
+  max-width: var(--measure);
+  color: var(--ink-soft);
+  font-size: 1.1em;
+  margin: 1.5rem 0 0;
+  text-wrap: pretty;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-top: 1.75rem;
+  font-size: 0.875rem;
+  color: var(--ink-faint);
+}
+
+.metaRow a { color: var(--accent); text-underline-offset: 3px; }
+
+/* ---------- sections ---------- */
+
+.sectionLabel {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  border-top: 1px solid var(--rule);
+  padding-top: 0.85rem;
+  margin: 3.5rem 0 1.75rem;
+}
+
+/* ---------- case study list ---------- */
+
+.workList {
+  display: grid;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.workCard {
+  display: block;
+  text-decoration: none;
+  background: var(--bg-raised);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.workCard:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workCard { transition: none; }
+  .workCard:hover { transform: none; }
+}
+
+.workCard h3 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 1.25;
+  margin: 0 0 0.6rem;
+  text-wrap: balance;
+}
+
+.workCard p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.workCard .context {
+  margin-top: 0.9rem;
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+}
+
+/* ---------- prose ---------- */
+
+.prose p {
+  max-width: var(--measure);
+  margin: 0 0 1.15rem;
+  text-wrap: pretty;
+}
+
+.prose h2 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  margin: 2.75rem 0 1rem;
+}
+
+/* ---------- case study page ---------- */
+
+.csHeader { padding: 3.5rem 0 0; }
+
+.csHeader h1 {
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 3rem);
+  text-wrap: balance;
+}
+
+.csContext {
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--ink-faint);
+}
+
+.stackRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stackRow li {
+  font-size: 0.78rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  color: var(--ink-soft);
+}
+
+.resultBox {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  padding: 1.1rem 1.35rem;
+  border-radius: 0 8px 8px 0;
+  margin: 2.5rem 0;
+}
+
+.resultBox h2 {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 0.6rem;
+  font-family: inherit;
+}
+
+.resultBox ul { margin: 0; padding-left: 1.1rem; }
+.resultBox li { margin-bottom: 0.3rem; }
+
+/* ---------- the TODO marker ---------- */
+
+.todo {
+  display: block;
+  background: var(--danger-bg);
+  border: 1px dashed var(--danger-rule);
+  color: var(--danger-ink);
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+  margin: 0 0 1.15rem;
+  max-width: var(--measure);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.todo strong {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+/* ---------- footer ---------- */
+
+.siteFooter {
+  border-top: 1px solid var(--rule);
+  margin-top: 5rem;
+  padding: 2rem 0 3.5rem;
+  font-size: 0.875rem;
+  color: var(--ink-faint);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.siteFooter a { color: var(--accent); text-underline-offset: 3px; }
+
+.backLink {
+  display: inline-block;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  text-underline-offset: 3px;
+}
