@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { caseStudies } from "@/content/case-studies";
 import { Prose } from "@/components/Prose";
+import { CaseDiagram } from "@/components/Diagrams";
 
 // Required for `output: "export"`: only the slugs below are built, and any
 // other path 404s at the edge instead of failing the build.
@@ -58,6 +59,9 @@ export default async function CaseStudyPage({
             <h2>{section.heading}</h2>
           </div>
           <Prose paragraphs={section.body} />
+          {section.heading === "What I did" ? (
+            <CaseDiagram slug={cs.slug} />
+          ) : null}
         </section>
       ))}
 

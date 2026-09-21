@@ -11,6 +11,7 @@ export default function Home() {
         <p className="tagline">{site.sub}</p>
         <div className="metaRow">
           <span>Working remotely, {site.timezone}</span>
+          <span>{site.availability}</span>
           <a href={`mailto:${site.email}`}>{site.email}</a>
           <a href={site.linkedin}>LinkedIn</a>
         </div>

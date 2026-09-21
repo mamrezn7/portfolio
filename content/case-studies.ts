@@ -20,6 +20,7 @@ export const site = {
   email: "shirazi@mamrez.com",
   linkedin: "https://linkedin.com/in/mohammadreza-ha-shirazi",
   timezone: "GMT+3:30",
+  availability: "Open to remote roles and to relocation in Europe",
 };
 
 export const about = [
@@ -141,6 +142,43 @@ export const caseStudies: CaseStudy[] = [
     result: [
       "Up to two minutes removed from the slowest critical workflows",
       "Hundreds of per-field queries removed from a single request path",
+    ],
+  },,
+  {
+    slug: "davilo-lms",
+    title: "The same dashboard, rebuilt three times",
+    blurb:
+      "Turning a German self-study language platform into a learning management system, where the hard part was never the exercises \u2014 it was deciding who is looking at the screen.",
+    context:
+      "Davilo, a German language-learning platform \u00b7 contract, remote \u00b7 2019 to 2021, and again in 2025",
+    stack: ["React", "TypeScript", "Material UI", "Bootstrap", "REST APIs"],
+    sections: [
+      {
+        heading: "The problem",
+        body: [
+          "Davilo began as a self-study site: browser-based exercises written in JavaScript \u2014 matching pairs of cards, filling in blanks, connecting recorded audio to the right word. I built web and mobile interfaces for it from 2019, and in 2025 the client came back for a restart: the same learning material, now inside a platform with classes, courses, examinations, and separate portals for teachers, students and administrators.",
+          "The exercises were not the problem. They existed, they worked, and years of teaching judgement were sitting in them. The problem was everything wrapped around them, and one question in particular that nobody could settle: who logs in, and what do they see when they do.",
+        ],
+      },
+      {
+        heading: "What I did",
+        body: [
+          "I wrapped the existing material rather than rebuilding it. The original JavaScript exercises stayed as they were, and the new application took ownership of accounts, authentication, and how an exercise is presented \u2014 on the web and inside a mobile app. The part of the product with real pedagogical work behind it was left alone, and the new engineering went where the new requirements actually were.",
+          "Then the dashboard question was answered three times. First, one dashboard serving teachers and students alike, changing what it showed according to the role. Then a single login routing to two entirely separate dashboards. Then two separate logins, each leading to its own. Those are three different shapes for routing, session handling and component boundaries \u2014 not three stylesheets.",
+          "Working with the client meant not sharing their hours. The engagement was a contract alongside other work, so the thing I had to be deliberate about was availability: reachable when something broke, and never the reason someone else was blocked.",
+        ],
+      },
+      {
+        heading: "What I would do differently",
+        body: [
+          "Press harder on the things I was sure about. There were moments in that project where I could see a direction would have to be undone later, and I said so once and then let it go. The dashboard was rebuilt three times, and at least one of those rebuilds was avoidable \u2014 not because anyone was careless, but because the person with the clearest view of what the change would cost stopped arguing for it.",
+        ],
+      },
+    ],
+    result: [
+      "Six years with the same German client, across two engagements four years apart",
+      "Existing exercises reused inside a new web and mobile product rather than rebuilt",
+      "Teacher, student and administrator flows delivered through three successive access models",
     ],
   },
 ];
