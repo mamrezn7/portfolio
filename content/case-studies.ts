@@ -144,7 +144,7 @@ export const caseStudies: CaseStudy[] = [
       "Up to two minutes removed from the slowest critical workflows",
       "Hundreds of per-field queries removed from a single request path",
     ],
-  },,
+  },
   {
     slug: "davilo-lms",
     title: "The same dashboard, rebuilt three times",
