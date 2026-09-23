@@ -57,6 +57,8 @@ export default function RootLayout({
             <span>
               <a href={`mailto:${site.email}`}>{site.email}</a>
               {" · "}
+              <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
+              {" · "}
               <a href={site.linkedin}>LinkedIn</a>
             </span>
           </footer>

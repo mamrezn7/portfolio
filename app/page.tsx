@@ -13,6 +13,7 @@ export default function Home() {
           <span>Working remotely, {site.timezone}</span>
           <span>{site.availability}</span>
           <a href={`mailto:${site.email}`}>{site.email}</a>
+          <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
           <a href={site.linkedin}>LinkedIn</a>
         </div>
       </section>
@@ -34,6 +35,18 @@ export default function Home() {
 
       <section id="about">
         <h2 className="sectionLabel">About</h2>
+        <picture>
+          <source srcSet="/portrait.webp" type="image/webp" />
+          <img
+            src="/portrait.jpg"
+            alt={site.name}
+            width={128}
+            height={128}
+            className="portrait"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
         <Prose paragraphs={about} />
       </section>
     </>

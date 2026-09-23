@@ -22,6 +22,8 @@ export const site = {
     "Frontend engineer, React and TypeScript. Nine years on enterprise web applications: process mining, business process management, digital banking.",
   email: "shirazi@mamrez.com",
   linkedin: "https://linkedin.com/in/mohammadreza-ha-shirazi",
+  phone: "+44 7351 872711",
+  phoneHref: "+447351872711",
   timezone: "GMT+3:30",
   availability: "Open to remote roles and to relocation in Europe",
 };
