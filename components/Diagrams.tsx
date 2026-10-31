@@ -72,17 +72,28 @@ function RowLabel({ x, y, text }: { x: number; y: number; text: string }) {
   );
 }
 
+/** A home-page thumbnail passes a cropped viewBox and hides itself from
+    screen readers: the card's own text already says what the diagram shows. */
+type DiagramProps = { viewBox?: string; decorative?: boolean };
+
 function Frame({
   children,
   height,
   title,
-}: {
+  viewBox,
+  decorative,
+}: DiagramProps & {
   children: ReactNode;
   height: number;
   title: string;
 }) {
   return (
-    <svg viewBox={`0 0 640 ${height}`} role="img" aria-label={title}>
+    <svg
+      viewBox={viewBox ?? `0 0 640 ${height}`}
+      {...(decorative
+        ? { "aria-hidden": true, focusable: false }
+        : { role: "img", "aria-label": title })}
+    >
       {children}
     </svg>
   );
@@ -90,9 +101,9 @@ function Frame({
 
 /* ------------------------------------------------------------------ */
 
-function BajetDiagram() {
+function BajetDiagram(props: DiagramProps) {
   return (
-    <Frame height={236} title="How the payment tab lost the user's place, and how the channel returned it">
+    <Frame {...props} height={236} title="How the payment tab lost the user's place, and how the channel returned it">
       <RowLabel x={4} y={20} text="What happened" />
       <Box x={4} y={32} title="Tab A" sub="step 4 of 6" />
       <Box x={235} y={32} title="Tab B" sub="payment gateway" />
@@ -110,9 +121,9 @@ function BajetDiagram() {
   );
 }
 
-function BpmnDiagram() {
+function BpmnDiagram(props: DiagramProps) {
   return (
-    <Frame height={236} title="Why a custom element must go through the command stack">
+    <Frame {...props} height={236} title="Why a custom element must go through the command stack">
       <RowLabel x={4} y={20} text="Painted on top" />
       <Box x={4} y={32} title="Custom node" sub="drawn over the canvas" />
       <Box x={235} y={32} title="Ctrl + Z" sub="diagram reverts" />
@@ -130,9 +141,9 @@ function BpmnDiagram() {
   );
 }
 
-function FarakavDiagram() {
+function FarakavDiagram(props: DiagramProps) {
   return (
-    <Frame height={236} title="Hundreds of per-field queries replaced by one query on click">
+    <Frame {...props} height={236} title="Hundreds of per-field queries replaced by one query on click">
       <RowLabel x={4} y={20} text="Before" />
       <Box x={4} y={32} title="One list request" sub="from the client" />
       <Box x={235} y={32} title="Query per field" sub="hundreds per response" />
@@ -197,12 +208,32 @@ function DaviloPanel({
   );
 }
 
-function DaviloDiagram() {
+function DaviloDiagram(props: DiagramProps) {
   return (
-    <Frame height={190} title="The same question about who logs in, answered three different ways">
+    <Frame {...props} height={190} title="The same question about who logs in, answered three different ways">
       <DaviloPanel x={2} label="First" shape="one" />
       <DaviloPanel x={222} label="Then" shape="split" />
       <DaviloPanel x={442} label="And then" shape="two" />
+    </Frame>
+  );
+}
+
+function CopilotDiagram(props: DiagramProps) {
+  return (
+    <Frame {...props} height={236} title="An AI proposal is checked against the real metadata, then approved, before it runs">
+      <RowLabel x={4} y={20} text="Every proposal" />
+      <Box x={4} y={32} title="A question" sub="in Persian or English" />
+      <Box x={235} y={32} title="Model proposes" sub="column and measure ids" />
+      <Box x={466} y={32} title="Metadata check" sub="does every id exist?" />
+      <Arrow x1={174} x2={235} y={61} label="tools only" />
+      <Arrow x1={405} x2={466} y={61} />
+
+      <RowLabel x={4} y={150} text="Only then" />
+      <Box x={4} y={162} title="All ids exist" sub="shown as a preview" />
+      <Box x={235} y={162} title="Analyst approves" sub="nothing runs before" />
+      <Box x={466} y={162} title="Query engine" sub="same path as any visual" tone="good" />
+      <Arrow x1={174} x2={235} y={191} />
+      <Arrow x1={405} x2={466} y={191} label="approve" tone="accent" />
     </Frame>
   );
 }
@@ -211,27 +242,42 @@ function DaviloDiagram() {
 
 const DIAGRAMS: Record<
   string,
-  { render: () => ReactElement; caption: string }
+  {
+    render: (props: DiagramProps) => ReactElement;
+    caption: string;
+    /** The crop shown on the home-page card: the "after" row where there is one. */
+    thumb: string;
+  }
 > = {
+  "farakav-ai-copilot": {
+    render: CopilotDiagram,
+    thumb: "0 4 640 92",
+    caption:
+      "The model only proposes. Its proposal is checked against the real metadata, and an id that does not exist turns it into a clarifying question. An approved proposal runs through the same query engine as a visual built by hand.",
+  },
   "bajet-onboarding": {
     render: BajetDiagram,
+    thumb: "0 136 640 92",
     caption:
-      "The gateway callback returned to the base URL rather than to the step that opened it, and the step state lived in the client. The channel carries the result back to the tab that still knows where the user was.",
+      "The gateway callback returned to the base URL instead of the step that opened it, and step state lived in the client. The channel carries the result back to the tab that still knows where the user was.",
   },
   "bpmn-extensions": {
     render: BpmnDiagram,
+    thumb: "0 136 640 92",
     caption:
-      "A custom element drawn on top of the canvas is not part of the diagram's history. Registered through the module system, the same element is undone, validated and serialised by the machinery that already handles every built-in one.",
+      "A custom element drawn over the canvas sits outside the diagram's history. Registered through the module system, the same element is undone, validated and serialised by the code that handles every built-in element.",
   },
   "process-mining-performance": {
     render: FarakavDiagram,
+    thumb: "0 136 640 92",
     caption:
-      "The work was real, it was just done too early — a query for every field in the response, producing detail that was only ever read after a click.",
+      "A query for every field in the response, producing detail that was only read after a click. The work was needed, just too early.",
   },
   "davilo-lms": {
     render: DaviloDiagram,
+    thumb: "0 4 640 178",
     caption:
-      "Three shapes for the same product. Each one is a different routing, session and component boundary, which is why redrawing it is not a restyle.",
+      "Three shapes for the same product. Each has its own routing, session handling and component boundaries, so redrawing it meant rebuilding it.",
   },
 };
 
@@ -245,4 +291,11 @@ export function CaseDiagram({ slug }: { slug: string }) {
       <figcaption className="figureCaption">{entry.caption}</figcaption>
     </figure>
   );
+}
+
+export function CaseThumb({ slug }: { slug: string }) {
+  const entry = DIAGRAMS[slug];
+  if (!entry) return null;
+  const Render = entry.render;
+  return <Render viewBox={entry.thumb} decorative />;
 }

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Render 3D stills</title>
+<style>
+  /* The same balloon tokens as app/globals.css, for both themes. */
+  :root {
+    --balloon-a: #b4582a; --balloon-b: #2a4c7a; --balloon-c: #efe3cd; --balloon-d: #26231d;
+  }
+  :root[data-theme="dark"] {
+    --balloon-a: #c96a37; --balloon-b: #3c66a0; --balloon-c: #e8dcc6; --balloon-d: #f1e7d6;
+  }
+  body { font: 14px ui-monospace, monospace; padding: 1rem; background: #ddd; }
+  canvas { display: none; }
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "/node_modules/three/build/three.module.js",
+    "three/examples/jsm/": "/node_modules/three/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<p>Rendering stills into public/3d/ …</p>
+<ol id="log"></ol>
+<script type="module">
+import { BalloonScene, HERO_LAYOUT, SOLO_POSE } from "/components/three/balloons.js";
+
+const log = (text) => document.getElementById("log").append(Object.assign(document.createElement("li"), { textContent: text }));
+
+const jobs = [];
+// Two widths of each, for srcset: phones take the half-size one.
+for (const theme of ["light", "dark"]) {
+  jobs.push({ name: `hero-${theme}`, theme, items: HERO_LAYOUT, w: 960, h: 1100 });
+  jobs.push({ name: `hero-${theme}-480`, theme, items: HERO_LAYOUT, w: 480, h: 550 });
+  for (const kind of Object.keys(SOLO_POSE)) {
+    jobs.push({ name: `${kind}-${theme}`, theme, items: [SOLO_POSE[kind]], w: 800, h: 600 });
+    jobs.push({ name: `${kind}-${theme}-400`, theme, items: [SOLO_POSE[kind]], w: 400, h: 300 });
+  }
+}
+// PNG copies for the Open Graph images, light theme only.
+jobs.push({ name: "hero", theme: "light", items: HERO_LAYOUT, w: 640, h: 734, type: "png" });
+for (const kind of Object.keys(SOLO_POSE)) {
+  jobs.push({ name: kind, theme: "light", items: [SOLO_POSE[kind]], w: 720, h: 540, type: "png" });
+}
+
+for (const job of jobs) {
+  const type = job.type ?? "webp";
+  document.documentElement.dataset.theme = job.theme;
+  const canvas = document.createElement("canvas");
+  document.body.append(canvas);
+  const scene = new BalloonScene(canvas, { items: job.items, still: true });
+  const blob = await scene.snapshot(job.w, job.h, `image/${type}`);
+  scene.dispose();
+  canvas.remove();
+  const res = await fetch(`/save/${job.name}.${type}`, { method: "POST", body: blob });
+  log(`${job.name}.${type}  ${Math.round(blob.size / 1024)} KB  ${res.status}`);
+}
+document.title = "done";
+log("done");
+</script>
+</body>
+</html>
