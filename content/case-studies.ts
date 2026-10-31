@@ -51,10 +51,10 @@ export const site = {
   ] as { text: string; slug: string; shape: ShapeKind; em?: boolean }[],
   sub:
     "Nine years of React and TypeScript on enterprise products in process mining, business process management, digital banking and eLearning, and lately the AI features and .NET services behind them.",
-  /** Under 60 characters, so search results show it whole. */
-  title: "Mohammadreza Shirazi — Senior Frontend Engineer",
+  /** Under 60 characters, so search results show it whole; carries the brand for "mamrez" searches. */
+  title: "Mohammadreza Shirazi (mamrez) — Senior Frontend Engineer",
   description:
-    "Mohammadreza Shirazi, senior frontend engineer: nine years of React and TypeScript, now building AI features on a .NET analytics platform. Case studies inside.",
+    "Mohammadreza Shirazi (mamrez), senior frontend engineer and React developer: nine years of React and TypeScript, now building AI features on a .NET platform.",
   location: "Tehran, Iran",
   email: "shirazi@mamrez.com",
   linkedin: "https://www.linkedin.com/in/mohammadreza-ha-shirazi/",
@@ -102,40 +102,90 @@ export const experience = [
     org: "Golrang System",
     years: "May 2025 – now",
     note: "Farakav: the process-mining platform, and a rewrite of its dashboard builder with AI features and a .NET back end.",
+    /** The CV page's detail for this role, from the resume. */
+    highlights: [
+      "Rewriting the Farakav dashboard builder: a React and TypeScript front end with sixteen visual types on a drag-and-drop canvas, and an ASP.NET Core service over SSAS that generates DAX and runs the queries.",
+      "Built its AI features on one model-agnostic gateway (Claude, OpenAI and an internal model, with fallback and usage tracking): a dashboard copilot, an analyst, a DAX copilot and a natural-language measure builder. Each checks what the model returns against the data model before anything runs.",
+      "Found the endpoint behind the platform’s slowest workflows: it ran a separate query for every field it returned. Deferring those queries until the click took up to two minutes off those workflows.",
+      "Built the platform’s data-management interfaces (metadata, data sources, complex CRUD workflows) over large analytical datasets without the UI locking up.",
+      "Mentored an intern and worked alongside a mid-level developer through code review and pairing; proposed a modular refactoring strategy now applied across core services.",
+    ],
   },
   {
     role: "Front-End Engineer",
     org: "Faash",
     years: "May 2024 – May 2025",
     note: "Business process management suite: BPMN-IO and FormJS extensions, an access-control platform.",
+    /** The CV page's detail for this role, from the resume. */
+    highlights: [
+      "Extended BPMN-IO and FormJS through their module system and command stack: custom element types, rendering and behaviours that stay in sync through undo, validation and serialisation, without forking upstream.",
+      "Added Jalali calendar support across the date logic as well as the display, and right-to-left layout through the process modeller and the form builder.",
+      "Exposed validation and input events to process designers, so a form field can set, clear or re-validate another field with no application code shipped for it.",
+      "Designed and built an access-control platform: granular permissions, role and user administration, system configuration and audit logging.",
+      "Built shared components adopted across several internal dashboards; feature work ran about 25% faster afterwards.",
+    ],
   },
   {
     role: "Front-End Engineer",
     org: "Simorq Tejarat",
     years: "Nov 2021 – May 2024",
     note: "Bajet, a consumer banking PWA: the Open Account journey, onboarding 600+ verified users a day.",
+    /** The CV page's detail for this role, from the resume. */
+    highlights: [
+      "Built the digital Open Account journey end to end: identity capture, bank and credit checks, fee payment, card selection and delivery. It onboards 600+ verified users a day in production.",
+      "Kept the journey resumable across the payment step, which returned in a separate browser tab, by handing the result back to the original tab over a BroadcastChannel.",
+      "Redesigned authentication and state-management flows, cutting duplicate network requests through better use of the Context API and client caching.",
+      "Developed customer-facing banking features within the security and compliance constraints of regulated software.",
+    ],
   },
   {
     role: "Front-End Engineer, contract",
     org: "Davilo (Germany, remote)",
     years: "Jul 2019 – Sep 2021, and 2025",
     note: "A language-learning platform, rebuilt in 2025 as a learning management system.",
+    /** The CV page's detail for this role, from the resume. */
+    highlights: [
+      "Built responsive web and mobile interfaces for a German language-learning platform, working asynchronously with designers and stakeholders across time zones.",
+      "Brought back in 2025 for a full product restart: a learning management system with online classes, course management, examinations, and teacher, student and administrator portals.",
+    ],
   },
   {
     role: "Front-End Developer, freelance",
     org: "Various clients",
     years: "2018 – 2020",
     note: "React and WordPress builds; performance, SEO and accessibility work.",
+    /** The CV page's detail for this role, from the resume. */
+    highlights: [
+      "Built web applications and business sites in React, JavaScript and WordPress for clients across several industries.",
+      "Improved performance, SEO, accessibility and PageSpeed scores through frontend optimisation.",
+    ],
   },
   {
     role: "Junior Front-End Developer",
     org: "Viratech Sharif",
     years: "Jun 2017 – Oct 2018",
     note: "Startup products in AngularJS, in a cross-functional Agile team.",
+    /** The CV page's detail for this role, from the resume. */
+    highlights: [
+      "Built responsive web applications for early-stage startup products in AngularJS, in a cross-functional Agile team.",
+    ],
   },
 ];
 
 export const education = "B.Sc. Information Technology, Islamic Azad University, South Tehran Branch, 2013 – 2019";
+
+/** The CV page's own sections, from the resume. */
+export const cv = {
+  summary:
+    "Senior frontend engineer with nine years building enterprise web applications in React and TypeScript, across process mining, business process management, digital banking and eLearning, and now the AI features and .NET services behind them. My work centres on what happens when real data volume and real users meet an interface: data-intensive views that must stay responsive, long multi-step flows that must survive interruption, and mature libraries that have to be extended to fit the product.",
+  education: [
+    "B.Sc. Information Technology, Islamic Azad University, South Tehran Branch, 2013 – 2019.",
+    "M.Sc. Information Technology (E-commerce), same university, 2019 – 2022: around 90% complete, discontinued for work, degree not awarded.",
+  ],
+  languages: ["Persian: native", "English: C1, professional working proficiency", "German: B2, upper intermediate"],
+  authorisation:
+    "Iranian national based in Tehran. Requires employer sponsorship to relocate, and meets the experience and salary criteria for the EU Blue Card under the IT shortage-occupation threshold and for the Dutch Highly Skilled Migrant scheme. Open to relocation in Europe and to fully remote roles. One month’s notice.",
+};
 
 /** Grouped for scanning; every item is on the resume or in a case study. */
 export const skills = [

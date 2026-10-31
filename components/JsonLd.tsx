@@ -74,6 +74,22 @@ export function profilePageSchema(modified: Date) {
   };
 }
 
+/** The CV page: a profile page about the same person, alongside the home page. */
+export function cvPageSchema() {
+  const url = `${site.url}/cv/`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${url}#cv`,
+    url,
+    name: `Frontend Engineer CV — ${site.name}`,
+    inLanguage: "en",
+    dateModified: new Date().toISOString(),
+    isPartOf: { "@id": `${site.url}/#website` },
+    mainEntity: { "@id": personId },
+  };
+}
+
 export function caseStudySchema(cs: CaseStudy) {
   const url = `${site.url}/work/${cs.slug}/`;
   return [

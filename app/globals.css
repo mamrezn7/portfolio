@@ -410,6 +410,44 @@ img { max-width: 100%; height: auto; }
   .caseNavLink:hover .caseNavShape img { transform: scale(1.08) rotate(-3deg); }
 }
 
+/* ---------- CV ---------- */
+
+.cv { padding-top: clamp(2rem, 5vw, 4rem); }
+.cvHead { margin-bottom: clamp(3rem, 6vw, 5rem); }
+.cvRole { margin: 0.75rem 0 0; font-size: var(--step-lead); font-weight: 600; }
+.cvContact { margin: 1rem 0 1.75rem; }
+.cvSection { margin-bottom: clamp(2.5rem, 5vw, 3.5rem); }
+.cvTitle { grid-column: 1 / 4; margin: 0 0 1rem; font-size: var(--step-lead); font-weight: 700; line-height: 1.2; }
+.cvBody { grid-column: 4 / 12; margin: 0; max-width: 46rem; }
+.cvRoles { list-style: none; padding: 0; display: grid; gap: 2rem; }
+.cvRoles h3 { margin: 0; font-size: var(--step-body); font-weight: 700; }
+.cvRoles h3 span { font-weight: 400; }
+.cvYears { margin: 0.2rem 0 0.6rem; color: var(--muted); font-size: var(--step-small); }
+.cvRoles ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.4rem; }
+.cvSkills { display: grid; gap: 0.75rem; }
+.cvSkills > div { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 1.5rem; }
+.cvSkills dt { color: var(--muted); font-size: var(--step-small); padding-top: 0.2rem; }
+.cvSkills dd { margin: 0; }
+.cvLinks, .cvPlain { padding-left: 1.1rem; display: grid; gap: 0.4rem; }
+.cvLinks span { color: var(--muted); }
+
+/* Printing the CV (or saving it as PDF): black on white, no site chrome. */
+@media print {
+  :root { --bg: #ffffff; --ink: #000000; --muted: #444444; --surface: #ffffff; }
+  body { font-size: 10.5pt; }
+  .skip, .runningHead, footer, .printButton { display: none !important; }
+  .cv { padding: 0; max-width: none; }
+  .cvHead { margin-bottom: 1.5rem; }
+  .cvHead .heading { font-size: 22pt; }
+  .cvSection { display: block; margin-bottom: 1rem; break-inside: auto; }
+  .cvRoles > li { break-inside: avoid; }
+  .cvTitle { margin: 0 0 0.4rem; font-size: 12pt; }
+  .cvRoles { gap: 0.9rem; }
+  .cvSkills > div { grid-template-columns: 9rem minmax(0, 1fr); gap: 0.75rem; }
+  a { color: inherit; text-decoration: none; }
+  .reveal { animation: none !important; transform: none !important; }
+}
+
 /* ---------- 404 ---------- */
 
 .notFound { padding-top: clamp(3rem, 8vw, 7rem); }
@@ -479,7 +517,7 @@ img { max-width: 100%; height: auto; }
   .caseFigure .numLabel { margin-top: 0; }
 
   .expIntro { margin-bottom: 2rem; }
-  .roles li, .skills dl > div { grid-template-columns: 1fr; gap: 0.25rem; }
+  .roles li, .skills dl > div, .cvSkills > div { grid-template-columns: 1fr; gap: 0.25rem; }
   .skillsTitle { margin-bottom: 1rem; }
   .aboutSide { margin-bottom: 2.5rem; }
 

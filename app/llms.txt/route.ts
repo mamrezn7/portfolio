@@ -14,7 +14,7 @@ export function GET() {
     "",
     `> ${site.description}`,
     "",
-    `${site.name} (full name ${site.fullName}; online as ${site.brand}) is a ${site.role.toLowerCase()} based in ${site.location}. ${site.availability}.`,
+    `${site.name} (full name ${site.fullName}, also written Mohammad Reza Shirazi; online as ${site.brand}) is a ${site.role.toLowerCase()} based in ${site.location}. ${site.availability}.`,
     "",
     ...about.map((p) => `${p}\n`),
     "## Case studies",
@@ -26,6 +26,7 @@ export function GET() {
     `- Email: ${site.email}`,
     `- LinkedIn: ${site.linkedin}`,
     `- Website: ${site.url}/`,
+    `- CV: ${site.url}/cv/`,
     "",
   ];
   return new Response(lines.join("\n"), {

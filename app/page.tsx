@@ -29,6 +29,7 @@ export default function Home() {
               <Link className="button" href={`/work/${lead.slug}/`}>
                 Read the AI case study
               </Link>
+              <Link href="/cv/">View CV</Link>
               <a href={`mailto:${site.email}`}>{site.email}</a>
             </div>
             <p className="availability">{site.availability}. One month&rsquo;s notice.</p>
@@ -125,6 +126,9 @@ export default function Home() {
               Experience
             </h2>
             <p>{education}.</p>
+            <p>
+              <Link href="/cv/">The full CV</Link>, with every role in detail.
+            </p>
           </div>
           <ol className="roles">
             {experience.map((r) => (
@@ -179,7 +183,7 @@ export default function Home() {
             </picture>
             <ul className="notes">
               <li>
-                {site.fullName} in full; in Persian,{" "}
+                {site.fullName} in full, also written Mohammad Reza Shirazi; in Persian,{" "}
                 <bdi lang="fa" dir="rtl">
                   {site.nameFa}
                 </bdi>
