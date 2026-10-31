@@ -16,11 +16,11 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const { slug } = await params;
   const cs = caseStudies.find((c) => c.slug === slug) ?? caseStudies[0];
   return ogImage({
-    kicker: `Case study · ${cs.name}`,
-    lines: [{ text: cs.title }],
-    size: cs.title.length > 44 ? 64 : 76,
+    title: cs.title,
+    size: cs.title.length > 44 ? 50 : 58,
+    sub: `Case study · ${cs.name}`,
     metric: cs.metric,
-    footer: site.name,
+    footer: `${site.name} · mamrez.com`,
     image: cs.shape,
   });
 }

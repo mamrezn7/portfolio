@@ -13,17 +13,10 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <div className="wrap notFound">
-      <div className="opener mono">
-        <span>
-          <b>404</b> — Not found
-        </span>
-      </div>
       <div className="grid">
         <div className="notFoundText">
-          <h1 className="display">
-            A flow that loses people. <em>This time it lost you.</em>
-          </h1>
-          <p>The page you asked for is not here. These are:</p>
+          <h1 className="heading">This page got lost on the way.</h1>
+          <p>Page not found. These are here:</p>
           <ul className="notFoundLinks">
             <li>
               <Link href="/">Home</Link>

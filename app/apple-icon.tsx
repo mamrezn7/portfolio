@@ -8,7 +8,7 @@ export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
 export default async function AppleIcon() {
-  const serif = await readFile(join(process.cwd(), "assets/fonts/InstrumentSerif-Regular.woff"));
+  const wide = await readFile(join(process.cwd(), "assets/fonts/TikTokSans-WideHeavy.woff"));
   return new ImageResponse(
     (
       <div
@@ -18,16 +18,16 @@ export default async function AppleIcon() {
           height: "100%",
           alignItems: "center",
           justifyContent: "center",
-          background: "#17150f",
-          color: "#f5efe3",
-          fontFamily: "Serif",
-          fontSize: 128,
-          paddingBottom: 12,
+          background: "#d10a14",
+          color: "#ffffff",
+          fontFamily: "Wide",
+          fontSize: 120,
+          paddingBottom: 6,
         }}
       >
         M
       </div>
     ),
-    { ...size, fonts: [{ name: "Serif", data: serif, style: "normal", weight: 400 }] },
+    { ...size, fonts: [{ name: "Wide", data: wide, style: "normal", weight: 800 }] },
   );
 }

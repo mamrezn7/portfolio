@@ -9,10 +9,10 @@ export const contentType = "image/png";
 
 export default function Image() {
   return ogImage({
-    kicker: "mamrez.com · Senior frontend engineer",
-    lines: site.headline.map((h) => ({ text: h.text, em: h.em })),
-    size: 76,
-    footer: `${site.name} — React and TypeScript`,
+    title: site.name,
+    size: 96,
+    sub: "Senior frontend engineer: React, TypeScript and AI features.",
+    footer: "mamrez.com",
     image: "hero",
   });
 }

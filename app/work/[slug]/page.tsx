@@ -50,28 +50,22 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   return (
     <article className="wrap casePage">
-      <nav className="opener mono" aria-label="Breadcrumb">
-        <span>
-          <Link href="/#work">
-            <b>02</b> Selected work
-          </Link>{" "}
-          / {index + 1} of {caseStudies.length}
-        </span>
-        <span>{cs.years}</span>
+      <nav className="crumbs" aria-label="Breadcrumb">
+        <Link href="/#work">Selected work</Link> · case study {index + 1} of {caseStudies.length}
       </nav>
 
       <header className="grid caseHead">
         <div className="caseHeadText">
-          <p className="mono caseContext">
-            Case study by{" "}
+          <h1 className="heading">{cs.title}</h1>
+          <p className="caseBlurb">{cs.blurb}</p>
+          <p className="caseByline">
+            By{" "}
             <Link href="/" rel="author">
               {site.name}
             </Link>{" "}
             · {cs.context}
           </p>
-          <h1 className="display">{cs.title}</h1>
-          <p className="caseBlurb">{cs.blurb}</p>
-          <ul className="stackRow mono" aria-label="Stack">
+          <ul className="stackRow" aria-label="Stack">
             {cs.stack.map((s) => (
               <li key={s}>{s}</li>
             ))}
@@ -85,17 +79,17 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           priority
           className="caseFig"
         >
-          <figcaption className="mono">{figureLine[cs.shape]}</figcaption>
+          <figcaption>{figureLine[cs.shape]}</figcaption>
         </BalloonFigure>
       </header>
 
-      <section className="grid caseFacts" aria-label="Outcome">
+      <section className="grid caseFacts reveal" aria-label="Outcome">
         <div className="caseMetric">
-          <span className="num display">{cs.metric.value}</span>
-          <span className="mono">{cs.metric.label}</span>
+          <span className="num">{cs.metric.value}</span>
+          <span className="numLabel">{cs.metric.label}</span>
         </div>
         <div className="outcome">
-          <h2 className="mono">Outcome</h2>
+          <h2>Outcome</h2>
           <ul>
             {cs.result.map((r) => (
               <li key={r}>{r}</li>
@@ -104,20 +98,18 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </div>
       </section>
 
-      {cs.sections.map((section, i) => {
+      {cs.sections.map((section) => {
         const key = sectionKey(section.heading);
         if (section.heading === "What I would do differently") {
           return (
-            <section className="differently" key={key} aria-labelledby={key}>
+            <section className="field differently" key={key} aria-labelledby={key}>
               <div className="grid">
-                <h2 className="caseAside mono" id={key}>
-                  <b>0{i + 1}</b> {section.heading}
+                <h2 className="caseSectionTitle" id={key}>
+                  {section.heading}
                 </h2>
-                <div className="differentlyBody">
+                <div className="differentlyBody reveal">
                   {section.body.map((p) => (
-                    <p key={p} className="display">
-                      {p}
-                    </p>
+                    <p key={p}>{p}</p>
                   ))}
                 </div>
               </div>
@@ -126,14 +118,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         }
         return (
           <section className="grid caseSection" key={key} aria-labelledby={key}>
-            <h2 className="caseAside mono" id={key}>
-              <b>0{i + 1}</b> {section.heading}
+            <h2 className="caseSectionTitle reveal" id={key}>
+              {section.heading}
             </h2>
-            <div className="caseBody">
+            <div className="caseBody reveal">
               <Prose paragraphs={section.body} />
             </div>
             {section.heading === "What I did" ? (
-              <div className="caseFigure">
+              <div className="caseDiagram reveal">
                 <CaseDiagram slug={cs.slug} />
               </div>
             ) : null}
@@ -146,12 +138,12 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           { cs: prev, label: "Previous" },
           { cs: next, label: "Next" },
         ].map(({ cs: other, label }) => (
-          <Link key={label} href={`/work/${other.slug}/`} className="caseNavLink">
+          <Link key={label} href={`/work/${other.slug}/`} className="caseNavLink reveal">
             <Still shape={other.shape} width={800} height={600} sizes="9rem" className="caseNavShape" />
-            <span className="mono">
-              {label} · {other.name.split(" · ")[0]}
+            <span className="caseNavLabel">
+              {label}: {other.name.split(" · ")[0]}
             </span>
-            <span className="display caseNavTitle">{other.title}</span>
+            <span className="caseNavTitle">{other.title}</span>
           </Link>
         ))}
       </nav>

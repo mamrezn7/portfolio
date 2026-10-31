@@ -293,9 +293,10 @@ export function CaseDiagram({ slug }: { slug: string }) {
   );
 }
 
-export function CaseThumb({ slug }: { slug: string }) {
+/** The diagram without its caption, decorative; cropped to its thumbnail unless `full`. */
+export function CaseThumb({ slug, full = false }: { slug: string; full?: boolean }) {
   const entry = DIAGRAMS[slug];
   if (!entry) return null;
   const Render = entry.render;
-  return <Render viewBox={entry.thumb} decorative />;
+  return <Render viewBox={full ? undefined : entry.thumb} decorative />;
 }

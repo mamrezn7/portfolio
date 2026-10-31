@@ -13,233 +13,188 @@ export default function Home() {
 
   return (
     <>
-      <div className="wrap">
-        <section className="hero" aria-labelledby="intro">
-          <div className="opener mono">
-            <span>
-              <b>01</b> Introduction
-            </span>
-            <span>{site.location}</span>
-          </div>
-          <div className="grid heroGrid">
-            <div className="heroText">
-              <h1 className="kicker" id="intro">
-                {site.kicker}
-              </h1>
-              <p className="headline display">
-                {site.headline.map((h, i) => (
-                  <span key={h.slug}>
-                    <Link href={`/work/${h.slug}/`} className="hl" data-shape={i}>
-                      {h.em ? <em>{h.text}</em> : h.text}
-                    </Link>{" "}
-                  </span>
-                ))}
-              </p>
-              <div className="heroBelow">
-                <div className="lede">
-                  <p>{site.sub}</p>
-                  <ul className="contactList">
-                    <li>
-                      <a href={`mailto:${site.email}`}>{site.email}</a>
-                    </li>
-                    <li>
-                      <a href={`tel:${site.phoneHref}`}>{site.phone}</a> ·{" "}
-                      <a href={site.linkedin} rel="me noopener" target="_blank">
-                        LinkedIn
-                      </a>{" "}
-                      · <a href="#experience">Experience</a>
-                    </li>
-                  </ul>
-                </div>
-                <aside className="sidenote">
-                  <span className="mono">Availability</span>
-                  {site.availability}. One month&rsquo;s notice.
-                </aside>
-              </div>
-            </div>
-            <BalloonFigure
-              variant="hero"
-              hrefs={heroHrefs}
-              width={960}
-              height={1100}
-              sizes="(min-width: 860px) 40vw, 92vw"
-              priority
-              className="balloonFig"
-            >
-              <figcaption className="mono">Each shape opens its case study.</figcaption>
-            </BalloonFigure>
-          </div>
-        </section>
-      </div>
+      <section className="hero wrap" aria-labelledby="intro">
+        {/* The name is the monument and the page's h1; the role sits inside
+            it so the heading says who and what in one place. */}
+        <h1 className="monument" id="intro">
+          <span className="monumentName wide">{site.name}</span>
+          <span className="monumentRole">{site.role}: React, TypeScript and AI features</span>
+        </h1>
 
-      <section className="band bandRust" aria-label="Key figures">
+        <div className="grid heroGrid">
+          <div className="heroText">
+            <p className="lede">{site.sub}</p>
+
+            <div className="heroActions">
+              <Link className="button" href={`/work/${lead.slug}/`}>
+                Read the AI case study
+              </Link>
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+            </div>
+            <p className="availability">{site.availability}. One month&rsquo;s notice.</p>
+
+            <p className="problemsIntro">Five problems I keep meeting, each with its case study:</p>
+            <ul className="problems">
+              {site.headline.map((h, i) => (
+                <li key={h.slug}>
+                  <Link href={`/work/${h.slug}/`} className="hl" data-shape={i}>
+                    {h.text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <BalloonFigure
+            variant="hero"
+            hrefs={heroHrefs}
+            width={960}
+            height={1100}
+            sizes="(min-width: 860px) 45vw, 92vw"
+            priority
+            className="balloonFig"
+          >
+            <figcaption>Each shape opens its case study.</figcaption>
+          </BalloonFigure>
+        </div>
+      </section>
+
+      <section className="inverse figuresBand" aria-label="Key figures">
         <div className="wrap">
           <ul className="figures">
             {site.proof.map((p) => (
               <li key={p.value} className="reveal">
-                <span className="num display">{p.value}</span>
-                <span className="mono">{p.label}</span>
+                <span className="num">{p.value}</span>
+                <span className="figLabel">{p.label}</span>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      <section className="work" id="work" aria-labelledby="work-title">
-        <div className="wrap">
-          <div className="opener mono">
-            <span>
-              <b>02</b> Selected work
-            </span>
-            <span>{caseStudies.length} case studies</span>
-          </div>
-          <h2 className="workTitle display" id="work-title">
-            Selected work
-          </h2>
+      <section className="work wrap" id="work" aria-labelledby="work-title">
+        <h2 className="heading sectionHead" id="work-title">
+          Selected work
+        </h2>
 
-          <article className="grid lead">
-            <div className="leadMetric reveal">
-              <span className="num display">{lead.metric.value}</span>
-              <span className="mono">{lead.metric.label}</span>
+        <article className="grid lead">
+          <div className="leadText reveal">
+            <h3 className="heading">
+              <Link href={`/work/${lead.slug}/`}>{lead.title}</Link>
+            </h3>
+            <p className="leadBlurb">{lead.blurb}</p>
+            <div className="leadMetric">
+              <span className="num">{lead.metric.value}</span>
+              <span className="numLabel">{lead.metric.label}</span>
             </div>
-            <div className="leadText reveal">
-              <span className="mono">
-                {lead.name} · {lead.years}
-              </span>
-              <h3 className="display">
-                <Link href={`/work/${lead.slug}/`}>{lead.title}</Link>
-              </h3>
-              <p>{lead.blurb}</p>
-              <Link className="readMore mono" href={`/work/${lead.slug}/`} aria-hidden="true" tabIndex={-1}>
-                Read the case study →
+            <Link className="more" href={`/work/${lead.slug}/`} aria-hidden="true" tabIndex={-1}>
+              Read the case study →
+            </Link>
+            <p className="leadMeta">
+              {lead.name} · {lead.years}
+            </p>
+          </div>
+          <div className="plate reveal">
+            <CaseThumb slug={lead.slug} full />
+          </div>
+        </article>
+
+        <ul className="caseList">
+          {rest.map((cs) => (
+            <li key={cs.slug} className="reveal">
+              <Link href={`/work/${cs.slug}/`} className="caseRow">
+                <Still shape={cs.shape} className="caseShape" width={800} height={600} sizes="(min-width: 860px) 14vw, 9rem" />
+                <div className="caseMain">
+                  <h3 className="caseTitle">{cs.title}</h3>
+                  <p>{cs.blurb}</p>
+                </div>
+                <div className="caseFigure">
+                  <span className="num">{cs.metric.value}</span>
+                  <span className="numLabel">{cs.metric.label}</span>
+                </div>
               </Link>
-            </div>
-            <div className="plate reveal">
-              <CaseThumb slug={lead.slug} />
-            </div>
-          </article>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-          <div className="wiring" aria-hidden="true">
-            <span className="trunk" />
-            <span className="bus" />
-            <span className="drop" />
-            <span className="drop" />
+      <section className="experience wrap" id="experience" aria-labelledby="experience-title">
+        <div className="grid">
+          <div className="expIntro">
+            <h2 className="heading" id="experience-title">
+              Experience
+            </h2>
+            <p>{education}.</p>
           </div>
-
-          <div className="stories">
-            {rest.map((cs) => (
-              <article className="story reveal" key={cs.slug}>
-                <div className="storyHead mono">
-                  <span>{cs.name.split(" · ")[0]}</span>
-                  <span>{cs.years}</span>
+          <ol className="roles">
+            {experience.map((r) => (
+              <li key={r.org + r.years} className="reveal">
+                <span className="roleYears">{r.years}</span>
+                <div>
+                  <h3>
+                    {r.role}, <span>{r.org}</span>
+                  </h3>
+                  <p>{r.note}</p>
                 </div>
-                <Still shape={cs.shape} className="storyShape" width={800} height={600} sizes="(min-width: 860px) 40vw, 92vw" />
-                <div className="num display">{cs.metric.value}</div>
-                <div className="numLabel mono">{cs.metric.label}</div>
-                <h3 className="display">
-                  <Link href={`/work/${cs.slug}/`}>{cs.title}</Link>
-                </h3>
-                <p>{cs.blurb}</p>
-                <Link className="readMore mono" href={`/work/${cs.slug}/`} aria-hidden="true" tabIndex={-1}>
-                  Read →
-                </Link>
-              </article>
+              </li>
             ))}
-          </div>
+          </ol>
+        </div>
+        <div className="grid skills">
+          <h3 className="skillsTitle">Skills</h3>
+          <dl>
+            {skills.map((s) => (
+              <div key={s.group} className="reveal">
+                <dt>{s.group}</dt>
+                <dd>{s.items.join(", ")}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
-      <section className="experience" id="experience" aria-labelledby="experience-title">
-        <div className="wrap">
-          <div className="opener mono">
-            <span>
-              <b>03</b> Experience
-            </span>
-            <span>2017 – now</span>
-          </div>
-          <div className="grid">
-            <div className="expIntro">
-              <h2 className="display" id="experience-title">
-                Experience
-              </h2>
-              <p>{education}.</p>
-            </div>
-            <ol className="roles">
-              {experience.map((r) => (
-                <li key={r.org + r.years}>
-                  <span className="mono roleYears">{r.years}</span>
-                  <div>
-                    <h3>
-                      {r.role}, <span>{r.org}</span>
-                    </h3>
-                    <p>{r.note}</p>
-                  </div>
-                </li>
+      <section className="field quote" aria-label="From the case studies">
+        <figure className="wrap grid">
+          <blockquote className="reveal">{lead.quote}</blockquote>
+          <figcaption>
+            From <Link href={`/work/${lead.slug}/`}>&ldquo;{lead.title}&rdquo;</Link>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section className="about wrap" id="about" aria-labelledby="about-title">
+        <div className="grid">
+          <div className="aboutSide">
+            <picture>
+              <source srcSet={site.portrait.replace(".jpg", ".webp")} type="image/webp" />
+              <img
+                src={site.portrait}
+                alt={site.name}
+                width={256}
+                height={256}
+                className="portrait"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <ul className="notes">
+              <li>
+                {site.fullName} in full; in Persian,{" "}
+                <bdi lang="fa" dir="rtl">
+                  {site.nameFa}
+                </bdi>
+                . Online as {site.brand}.
+              </li>
+              {aboutNotes.map((n) => (
+                <li key={n}>{n}</li>
               ))}
-            </ol>
+            </ul>
           </div>
-          <div className="grid skills">
-            <h3 className="mono skillsTitle">Skills</h3>
-            <dl>
-              {skills.map((s) => (
-                <div key={s.group}>
-                  <dt className="mono">{s.group}</dt>
-                  <dd>{s.items.join(", ")}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </div>
-      </section>
-
-      <section className="band bandBlue quote" aria-label="From the case studies">
-        <div className="wrap">
-          <figure className="grid">
-            <blockquote className="display reveal">{lead.quote}</blockquote>
-            <figcaption className="mono">
-              From <Link href={`/work/${lead.slug}/`}>&ldquo;{lead.title}&rdquo;</Link>
-            </figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section className="about" id="about" aria-labelledby="about-title">
-        <div className="wrap">
-          <div className="opener mono">
-            <span>
-              <b>04</b> <span id="about-title">About {site.name}</span>
-            </span>
-          </div>
-          <div className="grid">
-            <div className="aboutSide">
-              <picture>
-                <source srcSet={site.portrait.replace(".jpg", ".webp")} type="image/webp" />
-                <img
-                  src={site.portrait}
-                  alt={site.name}
-                  width={256}
-                  height={256}
-                  className="portrait"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </picture>
-              <ul className="notes">
-                <li>
-                  {site.fullName} in full; in Persian,{" "}
-                  <bdi lang="fa" dir="rtl">
-                    {site.nameFa}
-                  </bdi>
-                  . Online as {site.brand}.
-                </li>
-                {aboutNotes.map((n) => (
-                  <li key={n}>{n}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="aboutText">
-              <Prose paragraphs={about} />
-            </div>
+          <div className="aboutText">
+            <h2 className="heading" id="about-title">
+              About me
+            </h2>
+            <Prose paragraphs={about} />
           </div>
         </div>
       </section>

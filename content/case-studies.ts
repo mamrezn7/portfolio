@@ -50,7 +50,7 @@ export const site = {
     { text: "Confident models.", slug: "farakav-ai-copilot", shape: "bubble" },
   ] as { text: string; slug: string; shape: ShapeKind; em?: boolean }[],
   sub:
-    "I am Mohammadreza Shirazi. For nine years I have built React and TypeScript interfaces for enterprise products in process mining, business process management, digital banking and eLearning, and lately the AI features and .NET services behind them. Each line above links to a case study.",
+    "Nine years of React and TypeScript on enterprise products in process mining, business process management, digital banking and eLearning, and lately the AI features and .NET services behind them.",
   /** Under 60 characters, so search results show it whole. */
   title: "Mohammadreza Shirazi — Senior Frontend Engineer",
   description:

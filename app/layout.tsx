@@ -1,27 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Instrument_Serif } from "next/font/google";
+import { TikTok_Sans } from "next/font/google";
 import Link from "next/link";
 import { site } from "@/content/case-studies";
 import { JsonLd, personSchema, websiteSchema } from "@/components/JsonLd";
 import "./globals.css";
 
-const display = Instrument_Serif({
-  weight: "400",
-  style: ["normal", "italic"],
+// One family for everything: stretched wide and heavy for the name,
+// normal width for reading. The width axis is loaded so CSS can set it.
+const sans = TikTok_Sans({
   subsets: ["latin"],
-  variable: "--font-display",
-  // "optional", not "swap": the fallback serif is wider, so swapping fonts
-  // re-wrapped the large titles and pushed the page down (a 0.17 layout shift).
-  // The font is preloaded and small, so it is almost always in time anyway.
-  display: "optional",
-});
-
-const mono = IBM_Plex_Mono({
-  weight: ["400", "500"],
-  subsets: ["latin"],
-  variable: "--font-mono",
-  // Same reason as the display font: the long context lines above case-study
-  // titles re-wrapped when this font replaced the fallback.
+  axes: ["wdth"],
+  variable: "--font-sans",
+  // "optional", not "swap": swapping re-wrapped the large type when the font
+  // arrived and pushed the page down (a 0.17 layout shift). The font is
+  // preloaded, so it is almost always in time anyway.
   display: "optional",
 });
 
@@ -58,8 +50,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5efe3" },
-    { media: "(prefers-color-scheme: dark)", color: "#12110f" },
+    { media: "(prefers-color-scheme: light)", color: "#f2f1ee" },
+    { media: "(prefers-color-scheme: dark)", color: "#111214" },
   ],
 };
 
@@ -71,25 +63,24 @@ const dateFa = new Intl.DateTimeFormat("fa-IR-u-ca-persian", { day: "numeric", m
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${mono.variable}`}>
+    <html lang="en" className={sans.variable}>
       <body>
-        <a className="skip mono" href="#main">
+        <a className="skip" href="#main">
           Skip to content
         </a>
         <div className="wrap">
-          <header className="runningHead mono">
-            <Link className="name" href="/">
-              {site.name}
+          <header className="runningHead">
+            <Link className="wordmark" href="/">
+              {site.brand}
             </Link>
             <span className="dateline">
               <time dateTime={built.toISOString().slice(0, 10)}>{dateEn}</time>
               <span aria-hidden="true">·</span>
-              <bdi lang="fa" className="fa">
-                {dateFa}
-              </bdi>
+              <bdi lang="fa">{dateFa}</bdi>
             </span>
             <nav className="navLinks" aria-label="Main">
               <Link href="/#work">Work</Link>
+              <Link href="/#experience">Experience</Link>
               <Link href="/#about">About</Link>
               <Link href="#contact">Contact</Link>
             </nav>
@@ -98,40 +89,40 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <main id="main">{children}</main>
 
-        <footer className="contact" id="contact">
-          <div className="wrap">
-            <div className="opener mono">
+        <footer id="contact">
+          <section className="contact wrap" aria-labelledby="contact-title">
+            <h2 className="contactTitle" id="contact-title">
+              Write to me at <a href={`mailto:${site.email}`}>{site.email}</a>
+            </h2>
+            <div className="contactRow">
+              <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
+              <a href={site.linkedin} rel="me noopener" target="_blank">
+                LinkedIn
+              </a>
               <span>
-                <b>05</b> Contact
+                {site.location} · {site.timezone}
               </span>
               <span>{site.availability}</span>
             </div>
-            <div className="grid">
-              <p className="contactTitle display">
-                Write to me at <a href={`mailto:${site.email}`}>{site.email}</a>
+          </section>
+          <div className="closing inverse">
+            <div className="wrap">
+              <p className="closingName wide" aria-hidden="true">
+                {site.name}
               </p>
-              <div className="contactRow">
-                <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
-                <a href={site.linkedin} rel="me noopener" target="_blank">
-                  LinkedIn
-                </a>
-                <span>
-                  {site.location} · {site.timezone}
-                </span>
-              </div>
-              <p className="colophon">
-                <span className="mono">This site</span>
-                Built with Next.js and three.js, with an AI coding agent; I made the design calls and reviewed every
-                change. Set in Instrument Serif and IBM Plex Mono. Last updated{" "}
-                <span className="nowrap">{dateEn}</span> ·{" "}
-                <bdi lang="fa" className="nowrap">
-                  {dateFa}
-                </bdi>
-                .
-                <span className="copyright">
+              <div className="colophon">
+                <p>
+                  Built with Next.js and three.js, with an AI coding agent; I made the design calls and reviewed
+                  every change. Set in TikTok Sans. Last updated <span className="nowrap">{dateEn}</span> ·{" "}
+                  <bdi lang="fa" className="nowrap">
+                    {dateFa}
+                  </bdi>
+                  .
+                </p>
+                <p>
                   © {built.getFullYear()} {site.name} · {site.brand}.com
-                </span>
-              </p>
+                </p>
+              </div>
             </div>
           </div>
         </footer>
