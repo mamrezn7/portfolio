@@ -1,15 +1,23 @@
 import type { ShapeKind } from "@/content/case-studies";
 
 /**
+ * Bump whenever scripts/stills.html re-renders the stills. Browsers and
+ * Cloudflare cache /3d/* for a week under the same file name, so without a
+ * new URL visitors keep seeing the old renders.
+ */
+export const STILLS_VERSION = "2026-10-31";
+
+/**
  * srcset strings for a pre-rendered still, in both themes. Each still exists
  * at full width and at half width (scripts/stills.html renders both), so a
  * phone never downloads the desktop-sized image.
  */
 export function stillSources(name: "hero" | ShapeKind) {
   const [full, half] = name === "hero" ? [960, 480] : [800, 400];
+  const url = (file: string) => `/3d/${file}.webp?v=${STILLS_VERSION}`;
   const set = (theme: "light" | "dark") =>
-    `/3d/${name}-${theme}-${half}.webp ${half}w, /3d/${name}-${theme}.webp ${full}w`;
-  return { light: set("light"), dark: set("dark"), src: `/3d/${name}-light.webp` };
+    `${url(`${name}-${theme}-${half}`)} ${half}w, ${url(`${name}-${theme}`)} ${full}w`;
+  return { light: set("light"), dark: set("dark"), src: url(`${name}-light`) };
 }
 
 /**
