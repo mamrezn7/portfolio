@@ -1,4 +1,5 @@
 import { about, caseStudies, site } from "@/content/case-studies";
+import { articles } from "@/content/articles";
 
 // Required by `output: "export"`: written once at build time as /llms.txt.
 export const dynamic = "force-static";
@@ -20,6 +21,10 @@ export function GET() {
     "## Case studies",
     "",
     ...caseStudies.map((cs) => `- [${cs.title}](${site.url}/work/${cs.slug}/): ${cs.blurb} Result: ${cs.metric.value} ${cs.metric.label}.`),
+    "",
+    "## Writing",
+    "",
+    ...articles.map((a) => `- [${a.title}](${site.url}/writing/${a.slug}/): ${a.description}`),
     "",
     "## Contact",
     "",

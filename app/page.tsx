@@ -5,6 +5,7 @@ import { CaseThumb } from "@/components/Diagrams";
 import { BalloonFigure } from "@/components/BalloonFigure";
 import { Still } from "@/components/Still";
 import { JsonLd, profilePageSchema } from "@/components/JsonLd";
+import { articles } from "@/content/articles";
 
 const heroHrefs = site.headline.map((h) => `/work/${h.slug}/`);
 
@@ -94,6 +95,13 @@ export default function Home() {
             <p className="leadMeta">
               {lead.name} · {lead.years}
             </p>
+            {articles
+              .filter((x) => x.caseSlug === lead.slug)
+              .map((x) => (
+                <p className="leadArticle" key={x.slug}>
+                  Article: <Link href={`/writing/${x.slug}/`}>{x.title}</Link>
+                </p>
+              ))}
           </div>
           <div className="plate reveal">
             <CaseThumb slug={lead.slug} full />

@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node scripts/check-cv-pdf.mjs",
+    "cv:pdf": "node scripts/cv-pdf.mjs",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"

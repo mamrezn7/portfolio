@@ -1,4 +1,5 @@
 import { site, type CaseStudy } from "@/content/case-studies";
+import type { Article } from "@/content/articles";
 
 /**
  * schema.org structured data. Search engines read it to tie the site, the
@@ -87,6 +88,26 @@ export function cvPageSchema() {
     dateModified: new Date().toISOString(),
     isPartOf: { "@id": `${site.url}/#website` },
     mainEntity: { "@id": personId },
+  };
+}
+
+export function articleSchema(a: Article) {
+  const url = `${site.url}/writing/${a.slug}/`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${url}#article`,
+    headline: a.title,
+    description: a.description,
+    url,
+    mainEntityOfPage: url,
+    datePublished: a.published,
+    dateModified: a.published,
+    inLanguage: "en",
+    author: { "@type": "Person", "@id": personId, name: site.name, url: `${site.url}/` },
+    publisher: { "@id": personId },
+    isPartOf: { "@id": `${site.url}/#website` },
+    about: { "@id": `${site.url}/work/${a.caseSlug}/#article` },
   };
 }
 

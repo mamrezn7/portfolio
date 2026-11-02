@@ -7,6 +7,7 @@ import { CaseDiagram } from "@/components/Diagrams";
 import { BalloonFigure } from "@/components/BalloonFigure";
 import { Still } from "@/components/Still";
 import { JsonLd, caseStudySchema } from "@/components/JsonLd";
+import { articles } from "@/content/articles";
 
 // Required for `output: "export"`: only the slugs below are built, and any
 // other path 404s at the edge instead of failing the build.
@@ -132,6 +133,15 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </section>
         );
       })}
+
+      {articles
+        .filter((x) => x.caseSlug === cs.slug)
+        .map((x) => (
+          <p className="caseArticle" key={x.slug}>
+            I wrote about the design behind this in more depth:{" "}
+            <Link href={`/writing/${x.slug}/`}>{x.title}</Link>.
+          </p>
+        ))}
 
       <nav className="caseNav" aria-label="More case studies">
         {[

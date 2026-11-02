@@ -7,3 +7,7 @@ next-env.d.ts
 tsconfig.tsbuildinfo
 mockups/
 .taste-skill/
+# Private CV data and tailored CVs: its own private repo (mamrezn7/cv-private).
+/private/
+# Session notes with job-search details; this repo is public.
+/HANDOFF.md

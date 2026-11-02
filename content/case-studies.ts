@@ -58,6 +58,8 @@ export const site = {
   location: "Tehran, Iran",
   email: "shirazi@mamrez.com",
   linkedin: "https://www.linkedin.com/in/mohammadreza-ha-shirazi/",
+  /** The /cv/ page as a PDF; must match PDF_NAME in scripts/cv-text.mjs. */
+  cvPdf: "/Mohammadreza-Shirazi-CV.pdf",
   /** Shown small in About; search engines also use it for the person. */
   portrait: "/portrait.jpg",
   education: "Islamic Azad University, South Tehran Branch",
@@ -168,6 +170,7 @@ export const experience = [
     /** The CV page's detail for this role, from the resume. */
     highlights: [
       "Built responsive web applications for early-stage startup products in AngularJS, in a cross-functional Agile team.",
+      "My main team was Justro, where I developed and launched three startup projects (Justro, Daal and Minit) and grew Daal’s organic traffic by 30% in six months.",
     ],
   },
 ];
@@ -177,7 +180,7 @@ export const education = "B.Sc. Information Technology, Islamic Azad University,
 /** The CV page's own sections, from the resume. */
 export const cv = {
   summary:
-    "Senior frontend engineer with nine years building enterprise web applications in React and TypeScript, across process mining, business process management, digital banking and eLearning, and now the AI features and .NET services behind them. My work centres on what happens when real data volume and real users meet an interface: data-intensive views that must stay responsive, long multi-step flows that must survive interruption, and mature libraries that have to be extended to fit the product.",
+    "Senior frontend engineer with nine years building enterprise web applications in React and TypeScript, across process mining, business process management, digital banking and eLearning, and now the AI features and .NET services behind them. Most of the hard problems came from real data volume and real users: views over large datasets that had to stay responsive, long multi-step flows that had to survive interruptions, and mature libraries I had to extend to fit the product.",
   education: [
     "B.Sc. Information Technology, Islamic Azad University, South Tehran Branch, 2013 – 2019.",
     "M.Sc. Information Technology (E-commerce), same university, 2019 – 2022: around 90% complete, discontinued for work, degree not awarded.",

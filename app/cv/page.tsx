@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { caseStudies, cv, experience, site, skills } from "@/content/case-studies";
 import { JsonLd, cvPageSchema } from "@/components/JsonLd";
-import { PrintButton } from "@/components/PrintButton";
 
 export const metadata: Metadata = {
   title: "Frontend Engineer CV",
@@ -31,7 +30,10 @@ export default function CvPage() {
           </a>{" "}
           · <Link href="/">{site.brand}.com</Link> · {site.location}
         </p>
-        <PrintButton />
+        {/* Printed from this page by scripts/cv-pdf.mjs; the build fails if it falls behind. */}
+        <a className="button printButton" href={site.cvPdf} download>
+          Download PDF
+        </a>
       </header>
 
       <section className="grid cvSection" aria-labelledby="cv-summary">

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { caseStudies } from "@/content/case-studies";
+import { articles } from "@/content/articles";
 
 // Required by `output: "export"`: tells Next this route is evaluated at
 // build time, not per request.
@@ -30,6 +31,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    ...articles.map((a) => ({
+      url: `${BASE}/writing/${a.slug}/`,
+      lastModified: new Date(a.published),
+      changeFrequency: "yearly" as const,
+      priority: 0.7,
+    })),
     ...caseStudies.map((cs) => ({
       url: `${BASE}/work/${cs.slug}/`,
       lastModified,

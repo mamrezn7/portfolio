@@ -10,7 +10,8 @@ export const contentType = "image/png";
 export default function Image() {
   return ogImage({
     title: site.name,
-    size: 96,
+    // 96 pushed the last letter of "Mohammadreza" off the 1200px card.
+    size: 86,
     sub: "Senior frontend engineer: React, TypeScript and AI features.",
     footer: "mamrez.com",
     image: "hero",
