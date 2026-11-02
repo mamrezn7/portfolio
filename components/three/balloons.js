@@ -1,11 +1,11 @@
 /**
- * The four inflated shapes: one per problem in the headline, one per case study.
+ * The five inflated shapes, one per case study, each an object from the project:
  *
- *   flow   — the flow that loses people      (Bajet onboarding)
- *   screen — the screen with too much data   (Farakav performance)
- *   bar    — the library that will not bend  (BPMN-IO extensions)
- *   knot   — the rules that keep changing    (Davilo LMS)
- *   bubble — the model that sounds sure       (Farakav AI copilot)
+ *   card     — the bank card the account-opening journey ends with  (Bajet)
+ *   database — the queries that now wait for the click               (Farakav performance)
+ *   bpmn     — a process diagram with a token running through it      (BPMN-IO extensions)
+ *   cap      — a graduation cap for the learning platform            (Davilo LMS)
+ *   sparkle  — the AI mark with a check: answers are checked first   (Farakav AI copilot)
  *
  * Plain ES module rather than TypeScript so that scripts/stills.html can load
  * this exact file in a browser to render the still images the site uses on
@@ -16,9 +16,9 @@ import {
   ACESFilmicToneMapping,
   Box3,
   CatmullRomCurve3,
-  ConeGeometry,
   DirectionalLight,
   Euler,
+  ExtrudeGeometry,
   Group,
   HemisphereLight,
   MathUtils,
@@ -28,8 +28,8 @@ import {
   PerspectiveCamera,
   Raycaster,
   Scene,
+  Shape,
   SphereGeometry,
-  TorusKnotGeometry,
   TubeGeometry,
   Vector2,
   Vector3,
@@ -40,20 +40,20 @@ import { mergeVertices } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 
 /** Where each shape sits when all four share the hero. */
 export const HERO_LAYOUT = [
-  { kind: "flow", pos: [-0.8, 2.3, 0], rot: [0, 0, 0.12] },
-  { kind: "screen", pos: [0.85, 1.15, -0.3], rot: [0.05, -0.38, 0] },
-  { kind: "bar", pos: [-0.55, -0.05, 0.45], rot: [0.1, 0.25, 0.32] },
-  { kind: "knot", pos: [1.0, -0.95, 0], rot: [0, 0, 0] },
-  { kind: "bubble", pos: [-0.5, -2.15, 0.2], rot: [0.05, 0.3, 0.06] },
+  { kind: "card", pos: [-0.75, 2.55, 0], rot: [0.12, 0.28, 0.1] },
+  { kind: "database", pos: [0.95, 1.45, -0.2], rot: [0.05, -0.35, 0] },
+  { kind: "bpmn", pos: [-0.45, 0.0, 0.4], rot: [0.12, 0.3, 0.12] },
+  { kind: "cap", pos: [1.0, -1.0, 0], rot: [0.45, -0.5, 0] },
+  { kind: "sparkle", pos: [-0.55, -2.15, 0.2], rot: [0.08, 0.3, 0.05] },
 ];
 
 /** The same shapes alone, posed to read well at card size. */
 export const SOLO_POSE = {
-  flow: { kind: "flow", pos: [0, 0, 0], rot: [0.2, -0.25, 0.12] },
-  screen: { kind: "screen", pos: [0, 0, 0], rot: [0.08, -0.42, 0.02] },
-  bar: { kind: "bar", pos: [0, 0, 0], rot: [0.25, 0.35, 0.3] },
-  knot: { kind: "knot", pos: [0, 0, 0], rot: [0.4, 0.3, 0] },
-  bubble: { kind: "bubble", pos: [0, 0, 0], rot: [0.08, -0.35, 0.04] },
+  card: { kind: "card", pos: [0, 0, 0], rot: [0.18, -0.3, 0.05] },
+  database: { kind: "database", pos: [0, 0, 0], rot: [0.18, -0.3, 0.05] },
+  bpmn: { kind: "bpmn", pos: [0, 0, 0], rot: [0.18, -0.3, 0.05] },
+  cap: { kind: "cap", pos: [0, 0, 0], rot: [0.45, -0.5, 0] },
+  sparkle: { kind: "sparkle", pos: [0, 0, 0], rot: [0.18, -0.3, 0.05] },
 };
 
 // A superellipsoid: boxy across its face, round through its depth, so it
@@ -85,9 +85,44 @@ const balloonMaterial = () =>
     envMapIntensity: 0.85,
   });
 
-const KNOTS = [[2, 3], [3, 4], [2, 5], [3, 5]];
-const knotGeometry = ([p, q]) => new TorusKnotGeometry(0.4, 0.14, 180, 28, p, q);
-const easeOutBack = (k) => 1 + 2.70158 * Math.pow(k - 1, 3) + 1.70158 * Math.pow(k - 1, 2);
+// A flat outline, puffed up: extruded with a deep, round bevel.
+function puffed(points, depth = 0.08, bevel = 0.07) {
+  const s = new Shape();
+  points.forEach(([x, y], i) => (i ? s.lineTo(x, y) : s.moveTo(x, y)));
+  s.closePath();
+  const g = new ExtrudeGeometry(s, {
+    depth, bevelEnabled: true, bevelThickness: bevel, bevelSize: bevel * 0.8, bevelSegments: 10, curveSegments: 12,
+  });
+  g.center();
+  g.computeVertexNormals();
+  return g;
+}
+
+// A four-point sparkle, the usual mark for "AI".
+function sparkle(r = 0.5, waist = 0.13, steps = 12) {
+  const pts = [];
+  for (let i = 0; i < 4; i++) {
+    const a = (i * Math.PI) / 2;
+    const tip = [Math.cos(a) * r, Math.sin(a) * r];
+    const next = [Math.cos(a + Math.PI / 2) * r, Math.sin(a + Math.PI / 2) * r];
+    // Concave sides: bend each edge in towards the centre.
+    for (let k = 0; k < steps; k++) {
+      const u = k / steps;
+      const x = (1 - u) * (1 - u) * tip[0] + 2 * u * (1 - u) * Math.cos(a + Math.PI / 4) * waist + u * u * next[0];
+      const y = (1 - u) * (1 - u) * tip[1] + 2 * u * (1 - u) * Math.sin(a + Math.PI / 4) * waist + u * u * next[1];
+      pts.push([x, y]);
+    }
+  }
+  return puffed(pts, 0.06, 0.08);
+}
+
+// A database: three stacked discs, close enough to read as one cylinder with seams.
+function database(add, mat, gap = 0.37) {
+  [gap, 0, -gap].forEach((y) => {
+    const d = add(pillow(1.3, 1.3, 0.44, 0.6, 0.3), mat, [0, y, 0]);
+    d.rotation.x = -Math.PI / 2 + 0.35;
+  });
+}
 
 function buildShape(kind, mats, idx) {
   const group = new Group();
@@ -101,90 +136,116 @@ function buildShape(kind, mats, idx) {
   // Per-shape animation beyond the shared bob and wobble.
   let tick = () => {};
 
-  if (kind === "flow") {
-    const path = new CatmullRomCurve3(
-      [[-1.05, 0.15, 0], [-0.55, 0.5, 0.15], [0, 0.02, 0], [0.5, -0.42, -0.15], [0.98, -0.12, 0]].map((p) => new Vector3(...p)),
-    );
-    const r = 0.18;
-    add(new TubeGeometry(path, 120, r, 32, false), mats.a);
-    const cap = new SphereGeometry(r, 32, 24);
-    add(cap, mats.a, path.getPoint(0).toArray());
-    const tail = path.getPoint(1);
-    add(cap, mats.a, tail.toArray());
-    // Now and then a ball leaves the end of the flow and falls away.
-    const lost = add(new SphereGeometry(0.1, 24, 16), mats.a, tail.toArray());
-    lost.userData.decor = true;
-    let life = 0;
-    lost.scale.setScalar(0.001);
-    tick = (dt) => {
-      life += dt;
-      const k = Math.max(0, life - 1.2);
-      lost.position.set(tail.x + k * 0.35, tail.y - 2.2 * k * k, tail.z + k * 0.2);
-      lost.scale.setScalar(Math.max(0.001, life < 1.2 ? Math.min(1, life / 0.4) : 1 - k / 1.1));
-      if (life > 3.6) life = 0;
-    };
-  }
 
-  if (kind === "screen") {
-    add(pillow(1.75, 1.2, 0.36), mats.b);
-    add(pillow(1.15, 0.14, 0.14, 0.3, 0.9), mats.c, [-0.12, 0.3, 0.17]);
-    add(pillow(0.85, 0.14, 0.14, 0.3, 0.9), mats.c, [-0.27, 0.04, 0.17]);
-    // The row that does not fit the screen it is on.
-    add(pillow(1.8, 0.14, 0.14, 0.3, 0.9), mats.c, [0.3, -0.24, 0.17]);
-  }
 
-  if (kind === "bar") {
-    add(pillow(2.0, 0.42, 0.42, 0.3, 0.9), mats.c);
-    const rivet = new SphereGeometry(0.075, 20, 14);
-    add(rivet, mats.a, [-0.72, 0, 0.2]);
-    add(rivet, mats.a, [0.72, 0, 0.2]);
-  }
 
-  if (kind === "knot") {
-    const knot = add(knotGeometry(KNOTS[0]), mats.d);
-    let which = 0;
-    let clock = 0;
-    let swapped = false;
-    // Every few seconds the knot pops out and comes back as a different knot.
-    tick = (dt, active) => {
-      group.rotation.x += dt * (active ? 1.2 : 0.4);
-      group.rotation.y += dt * (active ? 1.6 : 0.6);
-      clock += dt;
-      const m = clock - 3.5;
-      let s = 1;
-      if (m > 0 && m < 0.2) s = 1 - m / 0.2;
-      else if (m >= 0.2) {
-        if (!swapped) {
-          which = (which + 1) % KNOTS.length;
-          knot.geometry.dispose();
-          knot.geometry = knotGeometry(KNOTS[which]);
-          swapped = true;
-        }
-        const k = (m - 0.2) / 0.5;
-        if (k >= 1) {
-          clock = 0;
-          swapped = false;
-        } else s = easeOutBack(k);
-      }
-      knot.scale.setScalar(Math.max(0.001, s));
-    };
-  }
 
-  if (kind === "bubble") {
-    add(pillow(1.7, 1.12, 0.5, 0.35, 0.85), mats.a);
-    // The tail, pointing down and out like a chat bubble's.
-    const tail = add(new ConeGeometry(0.24, 0.5, 40), mats.a, [-0.52, -0.66, 0]);
-    tail.rotation.z = Math.PI - 0.55;
-    // Three "typing" dots: the model about to say something with confidence.
-    const dots = [-0.38, 0, 0.38].map((x) => add(new SphereGeometry(0.11, 24, 16), mats.c, [x, 0.02, 0.24]));
+
+  const addTo = (parent, geo, mat, pos = [0, 0, 0]) => {
+    const m = new Mesh(geo, mat);
+    m.position.set(...pos);
+    m.userData.idx = idx;
+    parent.add(m);
+    return m;
+  };
+
+  if (kind === "card") {
+    // Bajet: the bank card the account-opening journey ends with.
+    add(pillow(1.7, 1.08, 0.16, 0.16, 0.8), mats.a);
+    add(pillow(0.34, 0.26, 0.07, 0.25, 0.9), mats.c, [-0.5, 0.12, 0.08]);
+    [-0.5, -0.17, 0.16, 0.49].forEach((x) => add(pillow(0.24, 0.07, 0.04, 0.3, 0.9), mats.c, [x, -0.22, 0.08]));
+    // Now and then it flips, like a card being picked in the journey.
     let t = 0;
     tick = (dt) => {
       t += dt;
-      dots.forEach((d, i) => {
-        d.position.y = 0.02 + 0.09 * Math.max(0, Math.sin(t * 5 - i * 0.9));
-      });
+      const k = t - 4;
+      if (k > 0 && k < 0.8) group.rotation.y += (dt / 0.8) * Math.PI * 2;
+      if (t > 4.8) t = 0;
     };
   }
+
+
+  if (kind === "bpmn") {
+    // Faash: a small BPMN diagram, start event, task and gateway.
+    const flow = new Group();
+    flow.scale.setScalar(1.05);
+    group.add(flow);
+    addTo(flow, pillow(0.42, 0.42, 0.22, 1, 0.85), mats.b, [-1.15, 0, 0]);
+    addTo(flow, pillow(0.86, 0.58, 0.26, 0.35, 0.85), mats.a, [-0.15, 0, 0]);
+    const gate = addTo(flow, pillow(0.5, 0.5, 0.26, 0.35, 0.85), mats.b, [0.98, 0, 0]);
+    gate.rotation.z = Math.PI / 4;
+    const wire = (x1, x2) => {
+      const path = new CatmullRomCurve3([new Vector3(x1, 0, 0), new Vector3(x2, 0, 0)]);
+      addTo(flow, new TubeGeometry(path, 8, 0.045, 12, false), mats.b);
+    };
+    wire(-0.93, -0.58);
+    wire(0.28, 0.62);
+    // A token runs through the process, as the modeller animates it.
+    const token = addTo(flow, new SphereGeometry(0.1, 20, 14), mats.c, [-1.15, 0, 0.18]);
+    token.userData.decor = true;
+    let t = 0;
+    tick = (dt) => {
+      t = (t + dt * 0.45) % 1;
+      token.position.x = -1.15 + t * 2.13;
+    };
+  }
+
+  if (kind === "cap") {
+    // Davilo: the learning platform, as a graduation cap with a swinging tassel.
+    const board = add(pillow(1.45, 1.45, 0.12, 0.25, 0.9), mats.b, [0, 0.12, 0]);
+    board.rotation.x = -Math.PI / 2;
+    const skull = add(new SphereGeometry(0.5, 40, 24, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), mats.b, [0, 0.1, 0]);
+    skull.scale.set(1.05, 0.75, 1.05);
+    add(new SphereGeometry(0.08, 16, 12), mats.a, [0, 0.2, 0]);
+    const cord = new CatmullRomCurve3([new Vector3(0, 0.2, 0), new Vector3(0.38, 0.2, 0.38), new Vector3(0.62, 0.18, 0.62)]);
+    add(new TubeGeometry(cord, 20, 0.025, 8, false), mats.a);
+    const hang = new Group();
+    hang.position.set(0.62, 0.18, 0.62);
+    group.add(hang);
+    addTo(hang, new TubeGeometry(new CatmullRomCurve3([new Vector3(0, 0, 0), new Vector3(0, -0.45, 0)]), 8, 0.025, 8, false), mats.a);
+    addTo(hang, pillow(0.13, 0.26, 0.13, 0.6, 0.9), mats.a, [0, -0.55, 0]);
+    let t = 0;
+    tick = (dt) => {
+      t += dt;
+      hang.rotation.z = Math.sin(t * 2.4) * 0.35;
+      hang.rotation.x = Math.sin(t * 1.7) * 0.15;
+    };
+  }
+
+
+  if (kind === "database") {
+    // Farakav performance: the endpoint's queries now wait for the click.
+    database(add, mats.b);
+    const lid = group.children[0];
+    const arrow = add(
+      puffed([[0, 0], [0, -0.62], [0.15, -0.48], [0.27, -0.74], [0.37, -0.69], [0.25, -0.44], [0.45, -0.44]], 0.06, 0.06),
+      mats.a,
+      [0.72, -0.12, 0.78],
+    );
+    arrow.scale.setScalar(1.3);
+    let t = 0;
+    tick = (dt) => {
+      t = (t + dt) % 2.6;
+      const k = t > 1.6 && t < 1.85 ? Math.sin(((t - 1.6) / 0.25) * Math.PI) : 0;
+      arrow.scale.setScalar(1.3 * (1 - k * 0.15));
+      lid.position.y = 0.37 + (t > 1.7 && t < 2.3 ? Math.sin(((t - 1.7) / 0.6) * Math.PI) * 0.18 : 0);
+    };
+  }
+
+
+  if (kind === "sparkle") {
+    // AI copilot: the AI mark, with a check because every answer is checked before it runs.
+    const star = add(sparkle(0.72, 0.18), mats.a);
+    add(pillow(0.6, 0.6, 0.22, 1, 0.85), mats.b, [0.5, -0.5, 0.2]);
+    const check = new CatmullRomCurve3([new Vector3(0.37, -0.5, 0.33), new Vector3(0.46, -0.6, 0.34), new Vector3(0.64, -0.38, 0.33)], false, "catmullrom", 0.1);
+    add(new TubeGeometry(check, 24, 0.045, 10, false), mats.c);
+    let t = 0;
+    tick = (dt) => {
+      t += dt;
+      star.rotation.z = Math.sin(t * 1.1) * 0.15;
+    };
+  }
+
 
   return { group, tick };
 }
@@ -238,11 +299,6 @@ export class BalloonScene {
         rot: new Euler(...item.rot),
         phase: idx * 1.7,
         s: 1,
-        // The library does not bend: it bobs with the rest and never tilts.
-        rigid: item.kind === "bar",
-        // The knot turns itself; the shared wobble would fight it.
-        spins: item.kind === "knot",
-        sway: item.kind === "screen",
       };
       this.root.add(group);
       return { group, tick };
@@ -358,10 +414,8 @@ export class BalloonScene {
       if (this.reduced) continue;
       g.position.y = base.y + Math.sin(t * 0.9 + phase) * 0.09;
       tick(dt, a === idx);
-      if (g.userData.spins || g.userData.rigid) continue;
       g.rotation.x = rot.x + Math.sin(t * 0.7 + phase) * 0.08;
       g.rotation.z = rot.z + Math.sin(t * 0.55 + phase) * 0.1;
-      if (g.userData.sway) g.rotation.y = rot.y + Math.sin(t * 0.5) * 0.14;
     }
     this.renderer.render(this.scene, this.camera);
   }

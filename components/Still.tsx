@@ -5,7 +5,7 @@ import type { ShapeKind } from "@/content/case-studies";
  * Cloudflare cache /3d/* for a week under the same file name, so without a
  * new URL visitors keep seeing the old renders.
  */
-export const STILLS_VERSION = "2026-10-31";
+export const STILLS_VERSION = "2026-11-02";
 
 /**
  * srcset strings for a pre-rendered still, in both themes. Each still exists

@@ -21,6 +21,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     size: a.title.length > 44 ? 50 : 58,
     sub: "Writing",
     footer: `${site.name} · mamrez.com`,
-    image: "bubble",
+    image: "sparkle",
   });
 }

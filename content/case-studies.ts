@@ -9,7 +9,7 @@
 export const TODO_PREFIX = "TODO:";
 export const TODO = (what: string) => `${TODO_PREFIX} ${what}`;
 
-export type ShapeKind = "flow" | "screen" | "bar" | "knot" | "bubble";
+export type ShapeKind = "card" | "database" | "bpmn" | "cap" | "sparkle";
 
 export const site = {
   url: "https://mamrez.com",
@@ -43,11 +43,11 @@ export const site = {
    * shapes in the hero, and a link to the case study about it.
    */
   headline: [
-    { text: "Lost flows.", slug: "bajet-onboarding", shape: "flow" },
-    { text: "Overfull screens.", slug: "process-mining-performance", shape: "screen", em: true },
-    { text: "Stubborn libraries.", slug: "bpmn-extensions", shape: "bar" },
-    { text: "Shifting rules.", slug: "davilo-lms", shape: "knot", em: true },
-    { text: "Confident models.", slug: "farakav-ai-copilot", shape: "bubble" },
+    { text: "Lost flows.", slug: "bajet-onboarding", shape: "card" },
+    { text: "Overfull screens.", slug: "process-mining-performance", shape: "database", em: true },
+    { text: "Stubborn libraries.", slug: "bpmn-extensions", shape: "bpmn" },
+    { text: "Shifting rules.", slug: "davilo-lms", shape: "cap", em: true },
+    { text: "Confident models.", slug: "farakav-ai-copilot", shape: "sparkle" },
   ] as { text: string; slug: string; shape: ShapeKind; em?: boolean }[],
   sub:
     "Nine years of React and TypeScript on enterprise products in process mining, business process management, digital banking and eLearning, and lately the AI features and .NET services behind them.",
@@ -242,7 +242,7 @@ export type CaseStudy = {
 export const caseStudies: CaseStudy[] = [
   {
     slug: "farakav-ai-copilot",
-    shape: "bubble",
+    shape: "sparkle",
     name: "Farakav · Golrang System",
     years: "2025–now",
     title: "An AI copilot that is not allowed to guess",
@@ -285,7 +285,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "bajet-onboarding",
-    shape: "flow",
+    shape: "card",
     name: "Bajet · Simorq Tejarat",
     years: "2021–2024",
     title: "An account-opening flow that onboards 600 people a day",
@@ -327,7 +327,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "bpmn-extensions",
-    shape: "bar",
+    shape: "bpmn",
     name: "Faash",
     years: "2024–2025",
     title: "Making BPMN-IO do what it was not built to do",
@@ -367,7 +367,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "process-mining-performance",
-    shape: "screen",
+    shape: "database",
     name: "Farakav · Golrang System",
     years: "2025–now",
     title: "Two minutes off the slowest workflow",
@@ -405,7 +405,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "davilo-lms",
-    shape: "knot",
+    shape: "cap",
     name: "Davilo",
     years: "2019–21, 2025",
     title: "The same dashboard, rebuilt three times",

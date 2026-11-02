@@ -28,7 +28,7 @@ export default function NotFound() {
             ))}
           </ul>
         </div>
-        <Still shape="flow" width={800} height={600} sizes="(min-width: 860px) 40vw, 92vw" className="notFoundShape" />
+        <Still shape="card" width={800} height={600} sizes="(min-width: 860px) 40vw, 92vw" className="notFoundShape" />
       </div>
     </div>
   );
