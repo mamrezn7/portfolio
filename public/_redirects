@@ -1,0 +1,6 @@
+# The Writing section is withdrawn. Cloudflare Pages keeps deleted files
+# reachable for up to a week after a deploy, so removing the pages isn't enough;
+# a redirect is checked first. Delete these lines when a new article goes up.
+/writing / 302
+/writing/ / 302
+/writing/* / 302
