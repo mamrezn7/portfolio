@@ -11,6 +11,8 @@
   Content-Type: image/png
 /writing/*/opengraph-image
   Content-Type: image/png
+/writing/opengraph-image
+  Content-Type: image/png
 /apple-icon
   Content-Type: image/png
 

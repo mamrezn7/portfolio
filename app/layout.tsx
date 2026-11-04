@@ -55,8 +55,8 @@ export const viewport: Viewport = {
   ],
 };
 
-// Static export: these are the dates of the build, so they say when the site
-// was last revised, in both calendars.
+// Static export: these are the dates of the build, so the footer says when the
+// site was last revised, in both calendars.
 const built = new Date();
 const dateEn = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric" }).format(built);
 const dateFa = new Intl.DateTimeFormat("fa-IR-u-ca-persian", { day: "numeric", month: "long", year: "numeric" }).format(built);
@@ -73,13 +73,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link className="wordmark" href="/">
               {site.brand}
             </Link>
-            <span className="dateline">
-              <time dateTime={built.toISOString().slice(0, 10)}>{dateEn}</time>
-              <span aria-hidden="true">·</span>
-              <bdi lang="fa">{dateFa}</bdi>
-            </span>
             <nav className="navLinks" aria-label="Main">
               <Link href="/#work">Work</Link>
+              <Link href="/writing/">Writing</Link>
               <Link href="/cv/">CV</Link>
               <Link href="/#about">About</Link>
               <Link href="#contact">Contact</Link>
@@ -112,8 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </p>
               <div className="colophon">
                 <p>
-                  Built with Next.js and three.js, with an AI coding agent; I made the design calls and reviewed
-                  every change. Set in TikTok Sans. Last updated <span className="nowrap">{dateEn}</span> ·{" "}
+                  Built with Next.js and three.js. Set in TikTok Sans. Last updated <span className="nowrap">{dateEn}</span> ·{" "}
                   <bdi lang="fa" className="nowrap">
                     {dateFa}
                   </bdi>

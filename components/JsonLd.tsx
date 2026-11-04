@@ -91,6 +91,22 @@ export function cvPageSchema() {
   };
 }
 
+/** The /writing/ index: a blog whose posts are the article pages. */
+export function blogSchema(list: Article[]) {
+  const url = `${site.url}/writing/`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": `${url}#blog`,
+    url,
+    name: `Writing — ${site.name}`,
+    inLanguage: "en",
+    author: { "@id": personId },
+    isPartOf: { "@id": `${site.url}/#website` },
+    blogPost: list.map((a) => ({ "@id": `${site.url}/writing/${a.slug}/#article` })),
+  };
+}
+
 export function articleSchema(a: Article) {
   const url = `${site.url}/writing/${a.slug}/`;
   return {

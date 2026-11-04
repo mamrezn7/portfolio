@@ -74,6 +74,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
   return (
     <article className="wrap article">
+      <nav className="crumbs" aria-label="Breadcrumb">
+        <Link href="/writing/">Writing</Link> · {date}
+      </nav>
       <header className="articleHead">
         <h1 className="heading">{a.title}</h1>
         <p className="caseByline">
