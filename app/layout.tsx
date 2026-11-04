@@ -75,7 +75,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
             <nav className="navLinks" aria-label="Main">
               <Link href="/#work">Work</Link>
-              <Link href="/writing/">Writing</Link>
               <Link href="/cv/">CV</Link>
               <Link href="/#about">About</Link>
               <Link href="#contact">Contact</Link>

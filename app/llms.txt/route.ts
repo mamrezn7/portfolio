@@ -22,10 +22,9 @@ export function GET() {
     "",
     ...caseStudies.map((cs) => `- [${cs.title}](${site.url}/work/${cs.slug}/): ${cs.blurb} Result: ${cs.metric.value} ${cs.metric.label}.`),
     "",
-    "## Writing",
-    "",
-    ...articles.map((a) => `- [${a.title}](${site.url}/writing/${a.slug}/): ${a.description}`),
-    "",
+    ...(articles.length
+      ? ["## Writing", "", ...articles.map((a) => `- [${a.title}](${site.url}/writing/${a.slug}/): ${a.description}`), ""]
+      : []),
     "## Contact",
     "",
     `- Email: ${site.email}`,

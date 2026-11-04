@@ -31,12 +31,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
-    {
-      url: `${BASE}/writing/`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
+    ...(articles.length
+      ? [{ url: `${BASE}/writing/`, lastModified, changeFrequency: "monthly" as const, priority: 0.7 }]
+      : []),
     ...articles.map((a) => ({
       url: `${BASE}/writing/${a.slug}/`,
       lastModified: new Date(a.published),
