@@ -2,10 +2,10 @@
  * The five inflated shapes, one per case study, each an object from the project:
  *
  *   card     — the bank card the account-opening journey ends with  (Bajet)
- *   database — the queries that now wait for the click               (Farakav performance)
+ *   database — a database and a pointer                               (Farakav performance)
  *   bpmn     — a process diagram with a token running through it      (BPMN-IO extensions)
  *   cap      — a graduation cap for the learning platform            (Davilo LMS)
- *   sparkle  — the AI mark with a check: answers are checked first   (Farakav AI copilot)
+ *   sparkle  — the AI mark with a check                               (Farakav AI copilot)
  *
  * Plain ES module rather than TypeScript so that scripts/stills.html can load
  * this exact file in a browser to render the still images the site uses on
@@ -214,7 +214,7 @@ function buildShape(kind, mats, idx) {
 
 
   if (kind === "database") {
-    // Farakav performance: the endpoint's queries now wait for the click.
+    // Farakav performance.
     database(add, mats.b);
     const lid = group.children[0];
     const arrow = add(
@@ -234,7 +234,7 @@ function buildShape(kind, mats, idx) {
 
 
   if (kind === "sparkle") {
-    // AI copilot: the AI mark, with a check because every answer is checked before it runs.
+    // AI copilot.
     const star = add(sparkle(0.72, 0.18), mats.a);
     add(pillow(0.6, 0.6, 0.22, 1, 0.85), mats.b, [0.5, -0.5, 0.2]);
     const check = new CatmullRomCurve3([new Vector3(0.37, -0.5, 0.33), new Vector3(0.46, -0.6, 0.34), new Vector3(0.64, -0.38, 0.33)], false, "catmullrom", 0.1);

@@ -11,7 +11,7 @@ export default function Image() {
   return ogImage({
     title: site.name,
     size: 86,
-    sub: "CV: senior frontend engineer, React, TypeScript, AI and .NET.",
+    sub: "CV: senior frontend engineer, React, TypeScript and AI features.",
     footer: "mamrez.com/cv",
     image: "hero",
   });

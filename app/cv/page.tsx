@@ -6,7 +6,7 @@ import { JsonLd, cvPageSchema } from "@/components/JsonLd";
 export const metadata: Metadata = {
   title: "Frontend Engineer CV",
   description:
-    "CV of Mohammadreza Shirazi (Mohammad Reza Shirazi), senior frontend engineer: React, TypeScript, AI and .NET. Experience, skills and work authorisation.",
+    "CV of Mohammadreza Shirazi (Mohammad Reza Shirazi), senior frontend engineer: React, TypeScript and AI features. Experience, skills and work authorisation.",
   alternates: { canonical: "/cv/" },
   openGraph: {
     title: `Frontend Engineer CV — ${site.name}`,

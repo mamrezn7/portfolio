@@ -1,5 +1,6 @@
 /**
- * Mechanism diagrams, one per case study.
+ * One diagram per case study, at the level a user would see: what happens
+ * for the person, never how the product does it.
  *
  * Plain inline SVG: no library, no client JavaScript, a couple of KB each.
  * All colour comes from the CSS custom properties in globals.css, so the
@@ -103,38 +104,38 @@ function Frame({
 
 function BajetDiagram(props: DiagramProps) {
   return (
-    <Frame {...props} height={236} title="How the payment tab lost the user's place, and how the channel returned it">
-      <RowLabel x={4} y={20} text="What happened" />
-      <Box x={4} y={32} title="Tab A" sub="step 4 of 6" />
-      <Box x={235} y={32} title="Tab B" sub="payment gateway" />
-      <Box x={466} y={32} title="Tab A" sub="back at step 1" tone="bad" />
-      <Arrow x1={174} x2={235} y={61} label="opens" />
-      <Arrow x1={405} x2={466} y={61} label="callback" />
+    <Frame {...props} height={236} title="The account-opening journey, from identity details to a delivered card">
+      <RowLabel x={4} y={20} text="The journey" />
+      <Box x={4} y={32} title="Your details" sub="identity and contact" />
+      <Box x={235} y={32} title="Verification" sub="the bank checks them" />
+      <Box x={466} y={32} title="Fee payment" sub="leaves the page" />
+      <Arrow x1={174} x2={235} y={61} />
+      <Arrow x1={405} x2={466} y={61} />
 
-      <RowLabel x={4} y={150} text="What we shipped" />
-      <Box x={4} y={162} title="Tab A" sub="step 4 of 6" />
-      <Box x={235} y={162} title="Tab B" sub="payment gateway" />
-      <Box x={466} y={162} title="Tab A" sub="continues at step 5" tone="good" />
-      <Arrow x1={174} x2={235} y={191} label="opens" />
-      <Arrow x1={405} x2={466} y={191} label="channel" tone="accent" />
+      <RowLabel x={4} y={150} text="And on" />
+      <Box x={4} y={162} title="Back in place" sub="where you left off" tone="good" />
+      <Box x={235} y={162} title="Choose a card" sub="and where it goes" />
+      <Box x={466} y={162} title="Account open" sub="card on its way" tone="good" />
+      <Arrow x1={174} x2={235} y={191} />
+      <Arrow x1={405} x2={466} y={191} />
     </Frame>
   );
 }
 
 function BpmnDiagram(props: DiagramProps) {
   return (
-    <Frame {...props} height={236} title="Why a custom element must go through the command stack">
-      <RowLabel x={4} y={20} text="Painted on top" />
-      <Box x={4} y={32} title="Custom node" sub="drawn over the canvas" />
-      <Box x={235} y={32} title="Ctrl + Z" sub="diagram reverts" />
-      <Box x={466} y={32} title="Node survives" sub="model and view disagree" tone="bad" />
+    <Frame {...props} height={236} title="An extended workflow element behaves like a built-in one">
+      <RowLabel x={4} y={20} text="Standard library" />
+      <Box x={4} y={32} title="A customer process" sub="with its own needs" />
+      <Box x={235} y={32} title="The modeller" sub="has no such element" />
+      <Box x={466} y={32} title="It doesn&apos;t fit" sub="process left out" tone="bad" />
       <Arrow x1={174} x2={235} y={61} />
       <Arrow x1={405} x2={466} y={61} />
 
-      <RowLabel x={4} y={150} text="Through the module system" />
-      <Box x={4} y={162} title="Custom node" sub="registered as a module" />
-      <Box x={235} y={162} title="Ctrl + Z" sub="command stack reverts" />
-      <Box x={466} y={162} title="Node reverts too" sub="model and XML agree" tone="good" />
+      <RowLabel x={4} y={150} text="Extended, no fork" />
+      <Box x={4} y={162} title="A customer process" sub="with its own needs" />
+      <Box x={235} y={162} title="The modeller" sub="with a custom element" />
+      <Box x={466} y={162} title="It fits" sub="undo and validation work" tone="good" />
       <Arrow x1={174} x2={235} y={191} />
       <Arrow x1={405} x2={466} y={191} />
     </Frame>
@@ -143,20 +144,20 @@ function BpmnDiagram(props: DiagramProps) {
 
 function FarakavDiagram(props: DiagramProps) {
   return (
-    <Frame {...props} height={236} title="Hundreds of per-field queries replaced by one query on click">
+    <Frame {...props} height={236} title="The slowest workflows, before and after">
       <RowLabel x={4} y={20} text="Before" />
-      <Box x={4} y={32} title="One list request" sub="from the client" />
-      <Box x={235} y={32} title="Query per field" sub="hundreds per response" />
-      <Box x={466} y={32} title="Up to two minutes" sub="for detail nobody opened" tone="bad" />
+      <Box x={4} y={32} title="Open a workflow" sub="start the task" />
+      <Box x={235} y={32} title="Everything prepared" sub="needed or not" />
+      <Box x={466} y={32} title="A long wait" sub="up to two minutes more" tone="bad" />
       <Arrow x1={174} x2={235} y={61} />
       <Arrow x1={405} x2={466} y={61} />
 
       <RowLabel x={4} y={150} text="After" />
-      <Box x={4} y={162} title="One list request" sub="from the client" />
-      <Box x={235} y={162} title="The list only" sub="no per-field work" />
-      <Box x={466} y={162} title="One detail query" sub="on the item you clicked" tone="good" />
+      <Box x={4} y={162} title="Open a workflow" sub="start the task" />
+      <Box x={235} y={162} title="What you need now" sub="and nothing else" />
+      <Box x={466} y={162} title="No extra wait" sub="the rest on request" tone="good" />
       <Arrow x1={174} x2={235} y={191} />
-      <Arrow x1={405} x2={466} y={191} label="on click" tone="accent" />
+      <Arrow x1={405} x2={466} y={191} />
     </Frame>
   );
 }
@@ -220,20 +221,20 @@ function DaviloDiagram(props: DiagramProps) {
 
 function CopilotDiagram(props: DiagramProps) {
   return (
-    <Frame {...props} height={236} title="An AI proposal is checked against the real metadata, then approved, before it runs">
-      <RowLabel x={4} y={20} text="Every proposal" />
+    <Frame {...props} height={236} title="An AI suggestion is checked, then reviewed by the analyst, before anything happens">
+      <RowLabel x={4} y={20} text="Every suggestion" />
       <Box x={4} y={32} title="A question" sub="in Persian or English" />
-      <Box x={235} y={32} title="Model proposes" sub="column and measure ids" />
-      <Box x={466} y={32} title="Metadata check" sub="does every id exist?" />
-      <Arrow x1={174} x2={235} y={61} label="tools only" />
+      <Box x={235} y={32} title="AI suggests" sub="never acts on its own" />
+      <Box x={466} y={32} title="Automatic check" sub="does it hold up?" />
+      <Arrow x1={174} x2={235} y={61} />
       <Arrow x1={405} x2={466} y={61} />
 
       <RowLabel x={4} y={150} text="Only then" />
-      <Box x={4} y={162} title="All ids exist" sub="shown as a preview" />
-      <Box x={235} y={162} title="Analyst approves" sub="nothing runs before" />
-      <Box x={466} y={162} title="Query engine" sub="same path as any visual" tone="good" />
+      <Box x={4} y={162} title="It holds up" sub="shown as a preview" />
+      <Box x={235} y={162} title="Analyst decides" sub="accept or change it" />
+      <Box x={466} y={162} title="The result" sub="on the dashboard" tone="good" />
       <Arrow x1={174} x2={235} y={191} />
-      <Arrow x1={405} x2={466} y={191} label="approve" tone="accent" />
+      <Arrow x1={405} x2={466} y={191} />
     </Frame>
   );
 }
@@ -253,31 +254,31 @@ const DIAGRAMS: Record<
     render: CopilotDiagram,
     thumb: "0 4 640 92",
     caption:
-      "The model only proposes. Its proposal is checked against the real metadata, and an id that does not exist turns it into a clarifying question. An approved proposal runs through the same query engine as a visual built by hand.",
+      "The AI only suggests. A suggestion that doesn’t hold up becomes a question for the analyst, and nothing happens until a person accepts it.",
   },
   "bajet-onboarding": {
     render: BajetDiagram,
     thumb: "0 136 640 92",
     caption:
-      "The gateway callback returned to the base URL instead of the step that opened it, and step state lived in the client. The channel carries the result back to the tab that still knows where the user was.",
+      "Payment is the step that takes people away from the page. The journey has to bring them back to where they were.",
   },
   "bpmn-extensions": {
     render: BpmnDiagram,
     thumb: "0 136 640 92",
     caption:
-      "A custom element drawn over the canvas sits outside the diagram's history. Registered through the module system, the same element is undone, validated and serialised by the code that handles every built-in element.",
+      "A custom element should behave like a built-in one, so undo and validation keep working on it.",
   },
   "process-mining-performance": {
     render: FarakavDiagram,
     thumb: "0 136 640 92",
     caption:
-      "A query for every field in the response, producing detail that was only read after a click. The work was needed, just too early.",
+      "Most of the wait was for something few people needed. The work now happens when someone asks for it.",
   },
   "davilo-lms": {
     render: DaviloDiagram,
     thumb: "0 4 640 178",
     caption:
-      "Three shapes for the same product. Each has its own routing, session handling and component boundaries, so redrawing it meant rebuilding it.",
+      "Three shapes for the same product, and each change meant rebuilding it.",
   },
 };
 

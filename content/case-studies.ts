@@ -50,11 +50,11 @@ export const site = {
     { text: "Confident models.", slug: "farakav-ai-copilot", shape: "sparkle" },
   ] as { text: string; slug: string; shape: ShapeKind; em?: boolean }[],
   sub:
-    "Nine years of React and TypeScript on enterprise products in process mining, business process management, digital banking and eLearning, and lately the AI features and .NET services behind them.",
+    "Nine years of React and TypeScript on enterprise products in process mining, business process management, digital banking and eLearning, and lately AI features and backend services.",
   /** Under 60 characters, so search results show it whole; carries the brand for "mamrez" searches. */
   title: "Mohammadreza Shirazi (mamrez) — Senior Frontend Engineer",
   description:
-    "Mohammadreza Shirazi (mamrez), senior frontend engineer and React developer: nine years of React and TypeScript, now building AI features on a .NET platform.",
+    "Mohammadreza Shirazi (mamrez), senior frontend engineer and React developer: nine years of React and TypeScript, now building AI features into enterprise products.",
   location: "Tehran, Iran",
   email: "shirazi@mamrez.com",
   linkedin: "https://www.linkedin.com/in/mohammadreza-ha-shirazi/",
@@ -71,12 +71,12 @@ export const site = {
   knowsAbout: [
     "React", "TypeScript", "Next.js", "Frontend architecture", "Web performance",
     "Accessibility", "Large language model integration", "C#", "ASP.NET Core",
-    "SQL Server Analysis Services", "DAX", "BPMN-IO", "Process mining", "Digital banking",
+    "Process mining", "Digital banking",
     "Right-to-left interfaces",
   ],
   proof: [
     { value: "9 yrs", label: "React and TypeScript, enterprise products" },
-    { value: "4", label: "AI features on one model-agnostic gateway" },
+    { value: "4", label: "AI features built for a dashboard builder" },
     { value: "C1 · B2", label: "English and German" },
     { value: "EU", label: "Blue Card eligible, one month’s notice" },
   ],
@@ -86,15 +86,15 @@ export const aboutNotes = [
   "Remote work with German clients since 2019.",
   "Persian native, English C1, German B2.",
   "Right-to-left layouts and Jalali calendar logic, including the date arithmetic.",
-  "Learning C#, .NET and databases on the current project, working with an AI coding agent.",
+  "Learning C#, .NET and databases, working with an AI coding agent.",
 ];
 
 export const about = [
-  "Most of my nine years have gone into enterprise products where the hard part is what happens to an interface when real data volume arrives: a process-mining platform rendering analytical datasets, a business process suite whose workflow editor had to do things its library was never designed for, and a consumer bank whose onboarding flow had to work for six hundred people a day.",
+  "Most of my nine years have gone into enterprise products where the hard part is what happens to an interface when real data volume arrives: a process-mining platform with large datasets, a business process suite whose workflow editor had to do things its library was never designed for, and a consumer bank whose onboarding flow had to work for six hundred people a day.",
   "In all of them the frontend is the product. There is no fallback interface or power-user CLI, so if a table locks up while it sorts, the feature is broken.",
   "I work in React and TypeScript, long enough to have opinions about state management that I hold loosely. I have worked remotely with German clients since 2019, which has made me better at writing things down.",
-  "At Golrang I now build AI features as well as interfaces. In the Farakav dashboard builder, language models propose charts and DAX measures, explain and repair expressions, and answer questions about a dashboard by running real queries. Each feature checks what the model returns against the data model before anything runs. I also use AI tools in my own work, and I review what they produce the way I would review a colleague’s pull request.",
-  "That is also where I want to keep growing. Alongside the frontend, I am learning the .NET and database side of the products I work on, and the AI features built on top of them, and I am looking for a team where I can do more of both.",
+  "At Golrang I now build AI features as well as interfaces, in the Farakav dashboard builder. What I care about most in that work is stopping a wrong answer before it reaches the screen. I also use AI tools in my own work, and I review what they produce the way I would review a colleague’s pull request.",
+  "That is also where I want to keep growing. Alongside the frontend, I am learning .NET, databases and how to build good AI features, and I am looking for a team where I can do more of both.",
 ];
 
 /** Roles, newest first, from the resume. */
@@ -103,27 +103,27 @@ export const experience = [
     role: "Senior Front-End Engineer",
     org: "Golrang System",
     years: "May 2025 – now",
-    note: "Farakav: the process-mining platform, and a rewrite of its dashboard builder with AI features and a .NET back end.",
+    note: "Farakav: a process-mining platform, and a rewrite of its dashboard builder with AI features.",
     /** The CV page's detail for this role, from the resume. */
     highlights: [
-      "Rewriting the Farakav dashboard builder: a React and TypeScript front end with sixteen visual types on a drag-and-drop canvas, and an ASP.NET Core service over SSAS that generates DAX and runs the queries.",
-      "Built its AI features on one model-agnostic gateway (Claude, OpenAI and an internal model, with fallback and usage tracking): a dashboard copilot, an analyst, a DAX copilot and a natural-language measure builder. Each checks what the model returns against the data model before anything runs.",
-      "Found the endpoint behind the platform’s slowest workflows: it ran a separate query for every field it returned. Deferring those queries until the click took up to two minutes off those workflows.",
-      "Built the platform’s data-management interfaces (metadata, data sources, complex CRUD workflows) over large analytical datasets without the UI locking up.",
-      "Mentored an intern and worked alongside a mid-level developer through code review and pairing; proposed a modular refactoring strategy now applied across core services.",
+      "Rewriting the Farakav dashboard builder, working across the front end and the service behind it.",
+      "Built its AI features: four assistants that help analysts create and understand dashboards. Their answers are checked before anything reaches the user.",
+      "Found the cause of the platform’s slowest workflows and fixed it, taking up to two minutes off them.",
+      "Built the platform’s data-management interfaces, which stay responsive over large datasets.",
+      "Mentored an intern and worked alongside a mid-level developer through code review and pairing; proposed a refactoring strategy now applied across the platform.",
     ],
   },
   {
     role: "Front-End Engineer",
     org: "Faash",
     years: "May 2024 – May 2025",
-    note: "Business process management suite: BPMN-IO and FormJS extensions, an access-control platform.",
+    note: "Business process management suite: extensions to its workflow modeller and form builder, an access-control platform.",
     /** The CV page's detail for this role, from the resume. */
     highlights: [
-      "Extended BPMN-IO and FormJS through their module system and command stack: custom element types, rendering and behaviours that stay in sync through undo, validation and serialisation, without forking upstream.",
+      "Extended an open-source workflow modeller and form builder with custom elements and behaviour, without forking either library.",
       "Added Jalali calendar support across the date logic as well as the display, and right-to-left layout through the process modeller and the form builder.",
-      "Exposed validation and input events to process designers, so a form field can set, clear or re-validate another field with no application code shipped for it.",
-      "Designed and built an access-control platform: granular permissions, role and user administration, system configuration and audit logging.",
+      "Gave process designers a way to make form fields react to one another, with no application code shipped for it.",
+      "Designed and built an access-control platform: permissions, role and user administration, and audit logging.",
       "Built shared components adopted across several internal dashboards; feature work ran about 25% faster afterwards.",
     ],
   },
@@ -134,9 +134,9 @@ export const experience = [
     note: "Bajet, a consumer banking PWA: the Open Account journey, onboarding 600+ verified users a day.",
     /** The CV page's detail for this role, from the resume. */
     highlights: [
-      "Built the digital Open Account journey end to end: identity capture, bank and credit checks, fee payment, card selection and delivery. It onboards 600+ verified users a day in production.",
-      "Kept the journey resumable across the payment step, which returned in a separate browser tab, by handing the result back to the original tab over a BroadcastChannel.",
-      "Redesigned authentication and state-management flows, cutting duplicate network requests through better use of the Context API and client caching.",
+      "Built the digital Open Account journey end to end, from identity details to card delivery. It onboards 600+ verified users a day in production.",
+      "Kept the journey continuous across the payment step, so people return to where they left off.",
+      "Redesigned the sign-in flow and removed duplicate network requests.",
       "Developed customer-facing banking features within the security and compliance constraints of regulated software.",
     ],
   },
@@ -180,7 +180,7 @@ export const education = "B.Sc. Information Technology, Islamic Azad University,
 /** The CV page's own sections, from the resume. */
 export const cv = {
   summary:
-    "Senior frontend engineer with nine years building enterprise web applications in React and TypeScript, across process mining, business process management, digital banking and eLearning, and now the AI features and .NET services behind them. Most of the hard problems came from real data volume and real users: views over large datasets that had to stay responsive, long multi-step flows that had to survive interruptions, and mature libraries I had to extend to fit the product.",
+    "Senior frontend engineer with nine years building enterprise web applications in React and TypeScript, across process mining, business process management, digital banking and eLearning, and now AI features and backend services. Most of the hard problems came from real data volume and real users: views over large datasets that had to stay responsive, long multi-step flows that had to survive interruptions, and mature libraries I had to extend to fit the product.",
   education: [
     "B.Sc. Information Technology, Islamic Azad University, South Tehran Branch, 2013 – 2019.",
     "M.Sc. Information Technology (E-commerce), same university, 2019 – 2022: around 90% complete, discontinued for work, degree not awarded.",
@@ -198,15 +198,15 @@ export const skills = [
   },
   {
     group: "AI",
-    items: ["Claude and OpenAI APIs", "Tool calling", "Grounding in metadata", "Model gateway with routing and fallback"],
+    items: ["Language-model APIs", "AI features in products", "AI-assisted development"],
   },
   {
     group: "Backend and data",
-    items: ["C#", "ASP.NET Core", "EF Core", "SQL Server", "SSAS", "DAX", "REST APIs"],
+    items: ["C#", "ASP.NET Core", "EF Core", "SQL Server", "REST APIs"],
   },
   {
     group: "Diagrams and visualisation",
-    items: ["BPMN-IO", "FormJS", "XYFlow", "Recharts", "GridStack"],
+    items: ["BPMN-IO", "FormJS", "XYFlow"],
   },
   {
     group: "Quality",
@@ -247,41 +247,40 @@ export const caseStudies: CaseStudy[] = [
     years: "2025–now",
     title: "An AI copilot that is not allowed to guess",
     blurb:
-      "Adding language-model features to a Power BI-style dashboard builder, where every column the model names is checked against the data model before anything runs.",
-    context: "Farakav dashboard builder, analytics on SSAS · Golrang System · 2025 to present",
-    metric: { value: "4", label: "AI features on one model-agnostic gateway" },
-    stack: ["React", "TypeScript", "C# / ASP.NET Core", "EF Core", "SSAS / DAX", "Claude and OpenAI APIs"],
+      "Adding AI features to a dashboard builder, where the product has to catch a wrong answer before anyone sees it.",
+    context: "Farakav dashboard builder · Golrang System · 2025 to present",
+    metric: { value: "4", label: "AI features built for a dashboard builder" },
+    stack: ["React", "TypeScript"],
     sections: [
       {
         heading: "The problem",
         body: [
-          "Farakav’s dashboard builder lets analysts build Power BI-style reports on SSAS models. I am rewriting it in phases: a React and TypeScript front end with sixteen visual types on a drag-and-drop canvas, and an ASP.NET Core service that reads the model’s metadata, generates DAX and runs the queries.",
-          "The brief also asked for AI: describe a chart or a measure, in Persian or English, and get it built. A language model will happily produce a plausible column name that does not exist. In a reporting tool that is worse than an error, because people trust the chart that comes out of it.",
+          "Farakav’s dashboard builder lets analysts build their own reports. I am rewriting it in phases, and the brief also asked for AI: describe what you want, in Persian or English, and get it built.",
+          "A language model will happily give a confident answer that is wrong. In a reporting tool that is worse than an error, because people trust the chart that comes out of it.",
         ],
       },
       {
         heading: "What I did",
         body: [
-          "The model never writes a query and never reaches SSAS. In the dashboard copilot it can do three things: propose a query definition, propose a DAX measure, or ask a clarifying question. Its prompt carries the model’s real metadata, with hidden fields left out.",
-          "Every column and measure id it proposes is checked against that metadata before the proposal reaches the screen. If one does not exist, the proposal becomes a clarifying question. An accepted proposal runs through the same query engine and measure validation as a hand-built visual, so the AI adds no second path to the data.",
-          "Later features follow the same rule: a natural-language measure builder, a DAX copilot that explains, repairs and generates expressions, and an analyst that answers questions about a dashboard by running validated queries. All of them call one AI gateway that routes by task and data-sensitivity policy, falls back to a second provider when the first fails, and logs usage and cost. Moving between Claude, OpenAI and the company’s internal model is a configuration change.",
-          "The back end was new to me. I came to it as a TypeScript developer and wrote the C# with an AI coding agent, reviewing each phase, checking it against a real SSAS model, and keeping the reasoning behind each design decision in the repository’s docs.",
+          "I started from one rule: the AI suggests and the analyst decides. Nothing it produces takes effect until it has been checked and a person has accepted it. If a suggestion doesn’t hold up, the analyst gets a question instead of a wrong chart.",
+          "Four features now follow that rule. They help analysts build dashboards, write calculations and ask questions about what a dashboard shows.",
+          "The back end was new to me. I came to it as a TypeScript developer and worked on it with an AI coding agent, reviewing each phase and writing down the reasoning behind each decision.",
         ],
       },
       {
         heading: "What I would do differently",
         body: [
-          "The first version of the AI gateway was built from a summary of the requirements instead of the specification itself, and it came out as a third hard-coded provider. The real spec asked for a model-agnostic gateway, so that work was redone. I now read the source document before building, however clear the summary sounds.",
+          "An early part of the AI work was built from a summary of the requirements instead of the specification itself, and it had to be redone. I now read the source document before building, however clear the summary sounds.",
         ],
       },
     ],
     result: [
-      "Every column or measure a model proposes is checked against the real data model before anything runs",
-      "Claude, OpenAI and an internal model behind one gateway, with fallback and usage tracking",
-      "Sixteen visual types on one shared query engine, covered by 571 backend tests",
+      "AI suggestions are checked before they reach anyone",
+      "Four AI features built on the same rule",
+      "Analysts can ask in Persian or English",
     ],
     quote:
-      "A plausible column name that does not exist is worse than an error, because people trust the chart that comes out of it.",
+      "A confident wrong answer is worse than an error, because people trust the chart that comes out of it.",
   },
   {
     slug: "bajet-onboarding",
@@ -294,34 +293,32 @@ export const caseStudies: CaseStudy[] = [
       "The digital Open Account journey for a consumer bank, where every extra step loses a share of the people who started.",
     context: "Bajet, a consumer digital banking PWA · Simorq Tejarat · 2021 to 2024",
     metric: { value: "600+", label: "verified users onboarded a day" },
-    stack: ["Next.js", "TypeScript", "Redux Toolkit", "Material UI"],
+    stack: ["Next.js", "TypeScript"],
     sections: [
       {
         heading: "The problem",
         body: [
-          "Opening a bank account online means a long form: identity details, verification, agreements. Each step is a place where people fail, get confused or close the tab. Steps can also fail asynchronously and come back later, some can be retried and some cannot, and people leave and return hours later expecting to pick up where they left off.",
-          "A wizard with a step counter in component state breaks the first time someone refreshes the page.",
-          "At Bajet the journey was a tree: personal and identity data, bank-side checks, a credit check, a payment step for the account-opening fee, then card selection and delivery details. The checks returned on their own schedule. Payment was the step that broke the model. The gateway opened in a new tab, and its callback returned to the flow’s base URL instead of the step that had started it. Step state lived in the client, so the returning tab knew nothing: the user paid and landed back at the beginning.",
+          "Opening a bank account online means a long form: identity details, verification, agreements. Each step is a place where people fail, get confused or close the tab, and people who leave and return hours later expect to pick up where they left off.",
+          "At Bajet the journey ran from identity details through verification and a fee payment to choosing a card and having it delivered. Payment was the hardest step, because it takes people away from the page they were on.",
         ],
       },
       {
         heading: "What I did",
         body: [
-          "The flow ran on client state, each step handing off to the next. That works until a step leaves the page, and payment did. What to do about it was the longest-running argument on the team.",
-          "I argued for a BroadcastChannel between the two tabs, and that is what we shipped. The callback tab only announced the payment result; the original tab listened, advanced its own state and closed the other tab. The alternative was to rebuild the flow so a returning tab could reconstruct its position from the server. That was the more correct answer, and it meant rewriting the whole journey to fix one step. The BroadcastChannel change was small, and it held up in production.",
-          "Form validation was the other half. The same rules had to run in the browser and in the API, so there was one schema, and one definition of a valid national ID or phone number.",
+          "I built the journey end to end. The longest-running discussion on the team was what should happen when someone came back from paying. We could rebuild the whole journey to fix one step, or make a small change that returned people to where they had left off. We shipped the small change, and it held up in production.",
+          "Form validation was the other half. The browser and the server had to agree on what counts as valid, so there was one definition of a valid national ID or phone number.",
         ],
       },
       {
         heading: "What I would do differently",
         body: [
-          "I would settle the shape of the flow before writing any of it. Past a certain complexity, keeping step state in the client and patching the gaps costs more than routed steps would have. With routing, the payment callback would have been an ordinary page load. I needed a clever fix because the architecture had already been chosen.",
+          "I would settle the shape of the flow before writing any of it. Past a certain complexity, patching the gaps costs more than a better structure would have. I needed a clever fix because the architecture had already been chosen.",
         ],
       },
     ],
     result: [
       "600+ verified users onboarded a day in production",
-      "The journey continues in the original tab after payment returns in a separate one",
+      "People return to the step they left after paying",
     ],
     quote: "I needed a clever fix because the architecture had already been chosen.",
   },
@@ -330,26 +327,25 @@ export const caseStudies: CaseStudy[] = [
     shape: "bpmn",
     name: "Faash",
     years: "2024–2025",
-    title: "Making BPMN-IO do what it was not built to do",
+    title: "Making a workflow library do what it was not built to do",
     blurb:
-      "Adding custom elements and behaviour to a mature open-source workflow modeller through its own extension points, without forking it.",
+      "Adding custom elements and behaviour to a mature open-source workflow modeller, without forking it.",
     context: "Enterprise business process management suite · Faash · 2024 to 2025",
     metric: { value: "0", label: "forks of the upstream library" },
-    stack: ["React", "TypeScript", "BPMN-IO", "FormJS", "XYFlow"],
+    stack: ["React", "TypeScript"],
     sections: [
       {
         heading: "The problem",
         body: [
-          "BPMN-IO is a good library with a clear model of a business process, and our customers had processes that did not fit it. We could fork it and maintain the fork forever, work around it in application code and end up with two models of the same diagram, or learn its extension points and use them.",
-          "Most of the gaps came from where our users are. The product needed Jalali dates in the date logic as well as the interface, and right-to-left layout across the modeller and the form builder. It also needed form fields that react to one another, which meant exposing validation, onChange and the other input events to process designers instead of keeping them inside application code.",
+          "The library is good, with a clear model of a business process, and our customers had processes that did not fit it. We could fork it and maintain the fork forever, work around it and end up with two versions of the same diagram, or extend it the way it was designed to be extended.",
+          "Most of the gaps came from where our users are. The product needed Jalali dates in the date logic as well as the interface, and right-to-left layout across the modeller and the form builder. It also needed form fields that react to one another, without a developer shipping code for each form.",
         ],
       },
       {
         heading: "What I did",
         body: [
-          "I went with the third option. BPMN-IO has a module system and a command stack, and through them you can add element types, override rendering and hook into behaviour without touching the library’s source. Our custom nodes took part in undo and redo, validation and serialisation. A layer drawn over the canvas would have fallen out of sync the first time someone pressed Ctrl+Z.",
-          "The clearest example is a form-builder field whose value is a JavaScript function. A process designer writes a handler into the form definition and it runs as a real event handler on the rendered form, so changing field X can set, clear or re-validate field Y with no application code shipped for that form.",
-          "I did the same with FormJS on the form side, so a process step and its form stayed consistent when either one changed.",
+          "I went with the third option. Our custom elements behaved like the built-in ones, so undo, validation and saving all worked on them. A layer drawn over the canvas would have fallen out of sync the first time someone pressed Ctrl+Z.",
+          "Process designers could also set up how one form field affects another themselves, with no application code shipped for that form. A process step and its form stayed consistent when either one changed.",
         ],
       },
       {
@@ -360,7 +356,7 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     result: [
-      "Custom workflow elements that take part correctly in undo, validation and serialisation",
+      "Custom workflow elements that behave like the built-in ones, including undo and validation",
       "No fork of the upstream library, so version upgrades stayed routine",
     ],
     quote: "Every feature we added had to fit someone else’s architecture.",
@@ -372,34 +368,34 @@ export const caseStudies: CaseStudy[] = [
     years: "2025–now",
     title: "Two minutes off the slowest workflow",
     blurb:
-      "Finding the endpoint behind an analytics platform’s slowest workflows, and moving hundreds of per-field queries to the moment someone opens an item.",
+      "Finding out why an analytics platform’s slowest workflows were slow, and taking up to two minutes off them.",
     context: "Farakav, an enterprise process-mining platform · Golrang System · 2025 to present",
     metric: { value: "−2 min", label: "at most, off the slowest workflows" },
-    stack: ["React", "TypeScript", "Vite", "Ant Design", "TanStack Query"],
+    stack: ["React", "TypeScript"],
     sections: [
       {
         heading: "The problem",
         body: [
           "Several workflows on the platform were slow enough that people started them and went to do something else. Nobody reported it any more, because it had always been that way.",
-          "Finding the cause needed no special tooling. One endpoint was clearly slower than everything around it, and the browser’s network panel showed it. The useful question was what that request was doing.",
+          "Finding the cause needed no special tooling. The browser’s own developer tools pointed straight at it. The useful question was why it was doing so much work.",
         ],
       },
       {
         heading: "What I did",
         body: [
-          "It ran a separate query for every field it returned, and a response could carry hundreds of fields. That data only appeared after a user clicked an individual item, and for most items nobody did. I moved the work to the click. The list request now returns only the list, and the detail query runs once, for the item someone opens.",
+          "Most of that work was for something few people ever needed. I moved it to the moment someone actually asks for it, so everyone else stopped waiting for it.",
         ],
       },
       {
         heading: "What I would do differently",
         body: [
-          "I accepted that endpoint as it was for too long. It had been slow since before I joined, everyone had stopped mentioning it, and I treated that as a fact about the system instead of something I could question. Once I looked at what it was doing, the fix was small.",
+          "I accepted that part of the system as it was for too long. It had been slow since before I joined, everyone had stopped mentioning it, and I treated that as a fact about the system instead of something I could question. Once I looked at what it was doing, the fix was small.",
         ],
       },
     ],
     result: [
       "Up to two minutes removed from the slowest workflows",
-      "Hundreds of per-field queries removed from the list request",
+      "People no longer wait for work they didn’t ask for",
     ],
     quote: "Once I looked at what it was doing, the fix was small.",
   },
@@ -414,20 +410,20 @@ export const caseStudies: CaseStudy[] = [
     context:
       "Davilo, a German language-learning platform · contract, remote · 2019 to 2021, and again in 2025",
     metric: { value: "3", label: "access models shipped for one product" },
-    stack: ["React", "TypeScript", "Material UI", "Bootstrap", "REST APIs"],
+    stack: ["React", "TypeScript"],
     sections: [
       {
         heading: "The problem",
         body: [
-          "Davilo began as a self-study site with browser exercises written in JavaScript: matching pairs of cards, filling in blanks, connecting recorded audio to the right word. I built web and mobile interfaces for it from 2019. In 2025 the client brought me back for a restart: the same material inside a platform with classes, courses, examinations, and separate portals for teachers, students and administrators.",
+          "Davilo began as a self-study site with interactive exercises. I built web and mobile interfaces for it from 2019. In 2025 the client brought me back for a restart: the same material inside a platform with classes, courses, examinations, and separate portals for teachers, students and administrators.",
           "The exercises already worked and carried years of teaching judgement. What needed work was everything around them, and one question nobody could settle: who logs in, and what do they see?",
         ],
       },
       {
         heading: "What I did",
         body: [
-          "I wrapped the existing exercises instead of rebuilding them. They stayed as they were, and the new application took over accounts, authentication and how an exercise is presented, on the web and in a mobile app. New engineering went where the new requirements were.",
-          "The dashboard question was then answered three times. First, one dashboard for teachers and students that changed with the role. Then one login routing to two separate dashboards. Then two logins, each with its own dashboard. Each version needed different routing, session handling and component boundaries.",
+          "I kept the existing exercises and built the new platform around them, on the web and in a mobile app. New engineering went where the new requirements were.",
+          "The dashboard question was then answered three times. First, one dashboard for teachers and students that changed with the role. Then one login leading to two separate dashboards. Then two logins, each with its own dashboard. Each version meant real rebuilding.",
           "The engagement was a contract alongside other work, in a different time zone, so I had to be deliberate about availability: reachable when something broke, and never the reason someone else was blocked.",
         ],
       },

@@ -165,8 +165,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
 const figureLine = {
   card: "The card the journey ends with.",
-  database: "The queries now wait for the click.",
+  database: "Up to two minutes back on the slowest workflows.",
   bpmn: "A process diagram, extended without a fork.",
   cap: "A learning platform with three access models.",
-  sparkle: "AI answers, checked before they run.",
+  sparkle: "AI answers, checked first.",
 } as const;
