@@ -24,7 +24,7 @@ export const articles: Article[] = [
     description:
       "Jalali dates inside BPMN-IO's form-js, without forking it: how the monorepo is put together, how a value moves through it, and every part the feature had to reach.",
     published: "2026-11-10",
-    body: `Our product used BPMN-IO's form-js to design and render the forms inside business processes. Our users work in Persian, so those forms needed the Jalali calendar in the date logic as well as on screen, in the form viewer and in the form builder. Forking the library was ruled out from the start, because a fork of a project this size becomes a second product that you maintain alone.
+    body: `I was working on a project that needed a form builder for the forms inside business processes. After some research, I found that BPMN-IO's form-js was a good library for it, but it lacked something our users needed. They work in Persian, so the forms needed the Jalali calendar in the date logic as well as on screen, in the form viewer and in the form builder, and form-js only knows Gregorian dates. Forking the library was ruled out from the start, because a fork of a project this size becomes a second product that you maintain alone.
 
 I already knew the calendar. Most of the work was fitting it into form-js's architecture: a large monorepo I hadn't written, code that is hard to follow, and very little documentation for the internals I needed to change. Before I could change anything safely, I had to work out how it fitted together. Below is the map I ended up with, and what the feature needed from each part of it.
 
