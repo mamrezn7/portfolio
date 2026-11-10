@@ -123,7 +123,7 @@ export function articleSchema(a: Article) {
     author: { "@type": "Person", "@id": personId, name: site.name, url: `${site.url}/` },
     publisher: { "@id": personId },
     isPartOf: { "@id": `${site.url}/#website` },
-    about: { "@id": `${site.url}/work/${a.caseSlug}/#article` },
+    ...(a.caseSlug ? { about: { "@id": `${site.url}/work/${a.caseSlug}/#article` } } : {}),
   };
 }
 

@@ -418,6 +418,10 @@ img { max-width: 100%; height: auto; }
 .articleHeading { margin: 2.5rem 0 1rem; font-size: var(--step-lead); font-weight: 700; line-height: 1.2; }
 .articleCode { margin: 0 0 1.5rem; padding: 1.25rem; background: var(--surface); overflow-x: auto; font-size: var(--step-small); line-height: 1.5; }
 .articleMore { margin-top: 2.5rem !important; }
+.articleList { margin: 0 0 1.5rem; padding-inline-start: 1.25rem; }
+.articleList li { margin: 0 0 0.75rem; padding-inline-start: 0.25rem; text-wrap: pretty; }
+.articleBody :not(pre) > code { font-size: 0.88em; padding: 0.05em 0.3em; background: var(--surface); overflow-wrap: anywhere; }
+.articleBody p a, .articleBody li a { text-decoration: underline; text-underline-offset: 0.18em; }
 
 /* ---------- writing index ---------- */
 

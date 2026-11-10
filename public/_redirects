@@ -1,6 +1,4 @@
-# The Writing section is withdrawn. Cloudflare Pages keeps deleted files
-# reachable for up to a week after a deploy, so removing the pages isn't enough;
-# a redirect is checked first. Delete these lines when a new article goes up.
-/writing / 302
-/writing/ / 302
-/writing/* / 302
+# The first article was withdrawn. Cloudflare Pages can keep deleted files
+# reachable for a while after a deploy, so its URLs redirect to the list.
+/writing/llm-dashboard-copilot-without-trusting-it /writing/ 301
+/writing/llm-dashboard-copilot-without-trusting-it/* /writing/ 301
